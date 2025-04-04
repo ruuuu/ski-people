@@ -2,9 +2,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    
+
     &__link {
-       
+
         margin-bottom: 12px;
 
         @media (min-width: 768px) {
@@ -16,7 +16,8 @@
         }
     }
 
-    &__img { // img
+    &__img {
+        // img
         width: 100%;
         object-fit: cover;
         border-radius: 16px;
@@ -29,14 +30,14 @@
         right: 12px;
     }
 
-    &__info{
+    &__info {
         display: flex;
         flex-direction: column;
         margin-bottom: 12px;
         gap: 18px;
         color: #1c1c1c;
 
-        &-title{
+        &-title {
             font-size: 12px;
 
             @media (min-width: 768px) {
@@ -44,7 +45,7 @@
             }
         }
 
-        &-price{
+        &-price {
             font-size: 16px;
 
             @media (min-width: 768px) {
@@ -53,7 +54,7 @@
         }
 
         @media (min-width: 768px) {
-            flex-direction: raw;
+            flex-direction: row;
             justify-content: space-between;
             margin-bottom: 37px;
         }
