@@ -169,5 +169,8 @@
         width: 100%;
     }
 
-    &__like {}
+    &__like {
+        align-self: center;
+        flex-shrink: 0; // чтоб не вывалиось
+    }
 }
