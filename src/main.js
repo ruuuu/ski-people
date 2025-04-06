@@ -3,23 +3,27 @@ import './style.scss';
 
 import Swiper from 'swiper';
 import { Navigation, Pagination, Thumbs } from 'swiper/modules';
-
 import 'swiper/css/navigation';
 import 'swiper/css';
 
+import { initRouter } from './js/router.js';
+
+
+const init = () => {
+  initRouter()
+};
+
+init(); // начало
 
 
 
-
-
-
-
-const swiper = new Swiper(".slider-thumbnails", {
+const swiper = new Swiper(".slider-thumbnails", { // маленький слайдер
   spaceBetween: 10,
   slidesPerView: 4,
   modules: [Navigation, Pagination],
 });
-const  swiper2 = new Swiper(".product__slider", { // 
+
+const  swiper2 = new Swiper(".product__slider", { // большой слайдер
   spaceBetween: 10,
   navigation: {
     nextEl: ".product__slider-arrow--next",
