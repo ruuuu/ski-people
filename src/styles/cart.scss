@@ -42,13 +42,13 @@
   &__title {
     // грид элмент большой
     grid-area: title;
+    margin-bottom: 24px;
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 24px;
+
 
     @media (min-width: 768px) {
       font-size: 32px;
-      margin-bottom: 24px;
     }
   }
 
@@ -112,8 +112,9 @@
     font-weight: 400;
 
     @media (min-width: 768px) {
-      font-size: 16px;
       padding-top: 12px;
+      font-size: 16px;
+
     }
   }
 
@@ -200,6 +201,8 @@
     }
   }
 
+
+
   &__order-wrapper {
     display: flex;
     justify-content: space-between;
@@ -216,10 +219,13 @@
     margin-bottom: 8px;
 
     @media (min-width: 768px) {
-      font-size: 12px;
       margin-bottom: 12px;
+      font-size: 12px;
+
     }
   }
+
+
 
   &__order-button {
     width: 100%;
@@ -227,9 +233,10 @@
     border-radius: 32px;
     border: 1px solid transparent;
     background-color: #0044f0;
-
     color: #fff;
   }
+
+
 
   &__form {
     // грид элемент большой 
@@ -281,9 +288,10 @@
     outline: none;
 
     &:focus-visible {
-      border-color: #780096;
+      // border-color: 
     }
   }
+
 
   &__number {
     min-width: 14px;
