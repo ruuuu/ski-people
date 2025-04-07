@@ -1,0 +1,134 @@
+.cart {
+
+
+
+  &__title {}
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+
+
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media (min-width: 1024px) {
+      order: 0;
+    }
+  }
+
+  &__item {
+    display: grid;
+    grid-template-areas:
+      "photo title ."
+      "photo art ."
+      "photo buttons price"
+    ;
+    column-gap: 8px;
+
+    @media (min-width: 768px) {
+      grid-template-areas:
+        "photo title ."
+        "photo art price"
+        "photo buttons ."
+      ;
+      column-gap: 12px;
+    }
+  }
+
+  &__item-image {
+    grid-area: photo;
+    width: 120px;
+    height: 99px;
+
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+
+  &__item-title {
+    grid-area: title;
+    align-self: center; // выравниевание по вертикали
+  }
+
+  &__item-price {
+    grid-area: price;
+
+    @media (min-width: 768px) {
+      justify-self: end;
+      align-self: center;
+    }
+  }
+
+  &__item-id {
+    grid-area: art;
+  }
+
+  .counter {
+    grid-area: buttons;
+    align-self: flex-end;
+    display: flex;
+  }
+
+  &__order {
+    order: 3;
+
+    @media (min-width: 1024px) {
+      order: 1;
+    }
+  }
+
+  &__order-title {}
+
+  &__order-info {}
+
+  &__order-count {}
+
+  &__order-price {}
+
+  &__order-delivery {}
+
+  &__order-button {}
+
+  &__form {
+
+    @media (min-width: 1024px) {
+      order: 2;
+    }
+  }
+
+  &__form-title {}
+
+  &__form-inputs {}
+
+  &__form-input {}
+
+  &__form-fieldset {}
+
+  &__form-legend {}
+
+  &__form-label {}
+
+  &__form-radio {}
+}
+
+
+
+
+.input {
+
+  &__item-counter {}
+}
+
+.counter {
+
+  &__minus {}
+
+  &__number {}
+
+  &__plus {}
+}

@@ -2,6 +2,10 @@ import { layout } from "./layout.js";
 
 
 export const Footer = () => {
+  
+  if(document.querySelector('footer')){
+    return '';
+  } 
  
   const el = document.createElement('footer');
   el.classList.add('footer');
@@ -110,5 +114,5 @@ export const Footer = () => {
 
   el.append(layout(child, 'footer__container')); //  
   
-  return el; // <footer class="footer">
+  return el; // <footer class="footer"> <div class="container footer__container"> ... </div> </footer>
 };

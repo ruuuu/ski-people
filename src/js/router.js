@@ -7,7 +7,7 @@ const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // для в�
 
 export const initRouter = () => {  
   router
-    .on('/', () => {  // при прееходе на "/"", запустися колбэк
+    .on('/', () => {  // при прееходе на "/", запустися колбэк
       document.body.append(Header(), Footer())
     })
 

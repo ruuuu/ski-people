@@ -3,6 +3,10 @@ import { layout } from "./layout.js";
 
 export const Header = () => {
 
+  if(document.querySelector('header')){
+    return '';
+  } 
+
   const el = document.createElement('header');
   el.classList.add('header')
   
@@ -61,7 +65,7 @@ export const Header = () => {
 
   el.append(layout(child, 'header__container')); // 
 
-  return el; // <header class="header">
+  return el; // <header class="header"> <div class="container header__container"> ... </div> </header>
 }
 
 

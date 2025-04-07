@@ -1,5 +1,5 @@
 
-export const layout  = (child, className) => {
+export const layoutMain  = (child, className) => {
   
   const el = document.createElement('div');
   el.classList.add('container');
