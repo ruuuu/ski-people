@@ -1,0 +1,39 @@
+.breadcrumb {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  &__container {}
+
+  &__navigation {}
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+  }
+
+  &__item {
+    position: relative;
+
+    &:not(:last-child) {
+
+      &::after {
+        content: '>';
+        position: absolute;
+        width: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 6px;
+        margin-right: 6px;
+        color: #969eae;
+      }
+    }
+  }
+
+  &__link {
+    font-size: 12px;
+    line-height: 1.2;
+    color: #969eae;
+  }
+}
