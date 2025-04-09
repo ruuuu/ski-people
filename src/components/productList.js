@@ -21,7 +21,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
     return '';
   }
 
-  let goodsItem = '';
+  let goodsItem = ``;
   
   
   data.forEach(({ name, price, img }) => {
@@ -64,8 +64,22 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
   parent.append(el);
 
   rendered = true; 
+
+  const catalogButton = document.querySelector('.catalog');
+  const links = catalogButton.querySelectorAll('.catalog__link'); // [a,a,a]
+
+  if(catalogButton){
+    catalogButton.addEventListener('click', (evt) => { // навешиваем событие на родителя(делегироваие)
+      console.log('evt.target ', evt.target)  // <a href>
+      links.forEach((item) =>  item.classList.remove('catalog__link--active')); 
+      if(evt.target.matches('a')){ // если  нажатый элемент есть ссылка
+        evt.target.classList.add('catalog__link--active')
+      }
+    });
+  }
+
   
-  return el; 
+  return el;
 }
 
 

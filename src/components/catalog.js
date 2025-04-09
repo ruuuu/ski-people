@@ -18,32 +18,31 @@ export const Catalog = (parent, data = []) => { // по умолчанию data=
   el.classList.add('catalog')
 
   
-  const typesArray = new Set(); // коллекция
-
-  data.forEach((item) => { 
-    typesArray.add(item.type)
-  });
-
-  console.log('typesArray ', typesArray) // {'Сноуборды', 'Термобельё', 'Лыжи', 'Куртка', 'Штаны'}
   
+  const typeList = [];
+
+  data.map(({ type }) => {
+    typeList.push(type);
+  })
   
 
 
-  let newItems = '';
+  let catalogItem = ``;
 
-  typesArray.forEach((item) => {
-
-    newItems += `
-      <li class="catalog__item">
-          <a class="catalog__link catalog__link--active" href="" click={}> ${item} </a>
-      </li>
+  // new Set(typeList) вернет {} неповторяющихся типов и преобращуем в массив:
+  [...new Set(typeList)].forEach((type) => {
+    catalogItem += `
+        <li class="catalog__item">
+          <a class="catalog__link" href="#"> ${type} </a>
+        </li>
     `
   });
-  
+
+
 
   const child = `
        <ul class="catalog__list">
-          ${newItems}
+          ${catalogItem}
       </ul>  
   `;
 
