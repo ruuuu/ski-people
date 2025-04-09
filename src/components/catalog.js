@@ -2,7 +2,7 @@ import { layout } from "./layout.js";
 
 let rendered = false;
 
-export const Catalog = () => {
+export const Catalog = (parent, data = []) => { // по умолчанию data=[]
 
  
   // if(document.querySelector('.catalog')){
@@ -10,7 +10,7 @@ export const Catalog = () => {
   // } 
   // или:
   if(rendered){
-    return '';
+    return document.querySelector('.catalog');
   }
 
   
@@ -18,41 +18,39 @@ export const Catalog = () => {
   el.classList.add('catalog')
 
   
-  const child = `
+  const typesArray = new Set(); // коллекция
+
+  data.forEach((item) => { 
+    typesArray.add(item.type)
+  });
+
+  console.log('typesArray ', typesArray) // {'Сноуборды', 'Термобельё', 'Лыжи', 'Куртка', 'Штаны'}
   
+  
+
+
+  let newItems = '';
+
+  typesArray.forEach((item) => {
+
+    newItems += `
+      <li class="catalog__item">
+          <a class="catalog__link catalog__link--active" href="" click={}> ${item} </a>
+      </li>
+    `
+  });
+  
+
+  const child = `
        <ul class="catalog__list">
-          <li class="catalog__item">
-            <a class="catalog__link catalog__link--active" href="">Все</a>
-          </li>
-          <li class="catalog__item">
-            <a class="catalog__link" href="">Лыжи</a>
-          </li>
-          <li class="catalog__item">
-            <a class="catalog__link" href="">Сноуборды</a>
-          </li>
-          <li class="catalog__item">
-            <a class="catalog__link" href="">Экипировка</a>
-          </li>
-          <li class="catalog__item">
-            <a class="catalog__link" href="">Ботинки</a>
-          </li>
+          ${newItems}
       </ul>  
-   
   `;
 
-  //console.log('layout: ', layout(child, "catalog__container").innerHTML) // <div class="container catalog__container">
 
   el.append(layout(child, "catalog__container")); 
   
-  // if(document.querySelector('main')){
-  //   document.querySelector('main').append(el);
-  //   return document.querySelector('main')
-  // }
-  // else{
-  //   const main = document.createElement('main');
-  //   main.append(el);
-  //   return main; 
-  // }
+  parent.append(el);
 
   rendered = true;
   

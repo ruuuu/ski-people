@@ -27,6 +27,5 @@ export const main  = () => {
   rendered = true;
 
   return el;
-  
 
 }
