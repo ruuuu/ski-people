@@ -33,7 +33,7 @@ export const Catalog = (parent, data = []) => { // по умолчанию data=
   [...new Set(typeList)].forEach((type) => {
     catalogItem += `
         <li class="catalog__item">
-          <a class="catalog__link" href="#"> ${type} </a>
+          <a class="catalog__link" href="#">${type}</a>
         </li>
     `
   });
