@@ -9,12 +9,9 @@ export const Catalog = () => {
   } 
 
   
-
   const el = document.createElement('div');
   el.classList.add('catalog')
 
- 
- 
   
   const child = `
   

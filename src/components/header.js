@@ -65,6 +65,8 @@ export const Header = () => {
 
   el.append(layout(child, 'header__container')); // 
 
+  document.body.append(el)
+
   return el; // <header class="header"> <div class="container header__container"> ... </div> </header>
 }
 

@@ -112,7 +112,9 @@ export const Footer = () => {
 
   `;
 
-  el.append(layout(child, 'footer__container')); //  
+  el.append(layout(child, 'footer__container')); 
+  
+  document.body.append(el)
   
   return el; // <footer class="footer"> <div class="container footer__container"> ... </div> </footer>
 };

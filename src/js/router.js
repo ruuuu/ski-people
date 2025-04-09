@@ -13,6 +13,10 @@ export const initRouter = () => {
       document.body.append(Header(), Catalog(), Footer())
     })
 
+    .on('/product', () => { 
+      console.log('product')
+    })
+
     .on('/favorite', () => { 
       document.body.append(Header(), Catalog(), Favorite(),  Footer()) // 
     })
