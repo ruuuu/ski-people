@@ -45,7 +45,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
     return '';
   }
 
-  const goodsItem = renderGoods(data);
+  const goodsItems = renderGoods(data);
 
   const el = document.createElement('section');
   el.classList.add('goods');
@@ -53,7 +53,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
   const child = `
       <h2 class="goods__title">${title}</h2>
       <ul class="goods__list">
-        ${goodsItem}
+        ${goodsItems}
        </ul>
   `;
 
@@ -66,7 +66,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
 
 
-  
+
   const catalogButtons = document.querySelector('.catalog');
   const links = catalogButtons.querySelectorAll('.catalog__link'); // [a,a,a]
 
@@ -85,9 +85,9 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
       const list = document.querySelector('.goods__list');
       list.textContent = '';
      
-      const goodsItem = renderGoods(refreshList)
+      const goodsItems = renderGoods(refreshList)
 
-      list.innerHTML = goodsItem;
+      list.innerHTML = goodsItems;
     });
   }
 
