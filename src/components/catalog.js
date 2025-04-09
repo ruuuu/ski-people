@@ -1,12 +1,17 @@
 import { layout } from "./layout.js";
 
+let rendered = false;
 
 export const Catalog = () => {
 
  
-  if(document.querySelector('.catalog')){
+  // if(document.querySelector('.catalog')){
+  //   return '';
+  // } 
+  // или:
+  if(rendered){
     return '';
-  } 
+  }
 
   
   const el = document.createElement('div');
@@ -39,16 +44,19 @@ export const Catalog = () => {
 
   el.append(layout(child, "catalog__container")); 
   
-  if(document.querySelector('main')){
-    document.querySelector('main').append(el);
-    return document.querySelector('main')
-  }
-  else{
-    const main = document.createElement('main');
-    main.append(el);
-    return main; 
-  }
+  // if(document.querySelector('main')){
+  //   document.querySelector('main').append(el);
+  //   return document.querySelector('main')
+  // }
+  // else{
+  //   const main = document.createElement('main');
+  //   main.append(el);
+  //   return main; 
+  // }
+
+  rendered = true;
   
+  return el;
   
 }
 

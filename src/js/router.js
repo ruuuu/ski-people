@@ -3,6 +3,10 @@ import { Header } from "../components/header.js";
 import { Footer } from "../components/footer.js";
 import { Catalog } from "../components/catalog.js";
 import { Favorite } from "../components/favorite.js";
+import { main } from "../components/main.js";
+import { Breadcrumbs } from "../components/breadcrumbs.js";
+
+
 
 
 const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // для всех ссылок начинающихся на /
@@ -10,7 +14,7 @@ const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // для в�
 export const initRouter = () => {  
   router
     .on('/', () => {  // при прееходе на "/", запустися колбэк
-      document.body.append(Header(), Catalog(), Footer())
+      document.body.append(Header(), main(Catalog()), Footer())
     })
 
     .on('/product', () => { 
@@ -18,10 +22,11 @@ export const initRouter = () => {
     })
 
     .on('/favorite', () => { 
-      document.body.append(Header(), Catalog(), Favorite(),  Footer()) // 
+      document.body.append(Header(), main(Breadcrumbs()), main(Favorite()),  Footer()) // 
     })
 
-    .notFound(()=>{
+    .notFound(() => {
+      document.body.innerHTML = `Такой страницы не существует`;
       console.log('404')
     })
 

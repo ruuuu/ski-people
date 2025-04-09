@@ -1,11 +1,18 @@
 import { layout } from "./layout.js";
 
+let rendered = false;
+
 
 export const Header = () => {
 
-  if(document.querySelector('header')){
+  // if(document.querySelector('header')){
+  //   return '';
+  // } 
+  // или:
+  if(rendered)
+  {
     return '';
-  } 
+  }
 
   const el = document.createElement('header');
   el.classList.add('header')
@@ -66,6 +73,8 @@ export const Header = () => {
   el.append(layout(child, 'header__container')); // 
 
   document.body.append(el)
+
+  rendered = true;
 
   return el; // <header class="header"> <div class="container header__container"> ... </div> </header>
 }

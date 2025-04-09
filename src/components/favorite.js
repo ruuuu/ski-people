@@ -1,11 +1,18 @@
 import { layout } from "./layout.js";
 
+let rendered = false;
+
+
 
 export const Favorite = () => {
 
-  if(document.querySelector('.goods')){
+  // if(document.querySelector('.goods')){
+  //   return '';
+  // } 
+  // или
+  if(rendered){
     return '';
-  } 
+  }
 
 
   const el = document.createElement('div');
@@ -13,7 +20,6 @@ export const Favorite = () => {
 
 
   const child = `
-  
         <ul class="goods__list">
           <li class="goods__item">
             <article class="goods__card card">
@@ -117,18 +123,17 @@ export const Favorite = () => {
             </article>
           </li>
         </ul>
-   
   `;
 
-  //console.log('layout: ', layout(child, "catalog__container").innerHTML) // <div class="container catalog__container">
 
   el.append(layout(child, "goods__container")); 
   
-  const main = document.querySelector('main');
-  main.append(el);
+  // const main = document.querySelector('main');
+  // main.append(el);
+
+  rendered = true; 
   
- 
-  return main; 
+  return el; 
 }
 
 
