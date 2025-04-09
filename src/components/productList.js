@@ -49,7 +49,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
   });
 
   const el = document.createElement('section');
-  el.classList.add('goods')
+  el.classList.add('goods');
 
   const child = `
         <h2 class="goods__title">${title}</h2>
