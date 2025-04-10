@@ -28,7 +28,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
                 </button>
                 <div class="card__info">
                   <h3 class="card__info-title"> ${name} </h3>
-                  <p class="card__info-price">${price}₽</p>
+                  <p class="card__info-price">${price.toLocaleString()} ₽</p>
                 </div>
                 <button class="card__button"> В корзину </button>
               </article>
@@ -73,8 +73,8 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
   if(catalogButtons){
     catalogButtons.addEventListener('click', (evt) => { // навешиваем событие на родителя(делегироваие)
       
-      links.forEach((item) =>  item.classList.remove('catalog__link--active')); 
-      if(evt.target.closest('a')){ // если  нажатый элемент есть ссылка
+      links.forEach((item) => item.classList.remove('catalog__link--active')); 
+      if(evt.target.closest('a')){ // если элемент/его родитель есть ссылка
         evt.target.classList.add('catalog__link--active')
       }
 
