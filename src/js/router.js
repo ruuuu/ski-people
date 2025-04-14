@@ -7,6 +7,9 @@ import { main } from "../components/main.js";
 import { Breadcrumbs } from "../components/breadcrumbs.js";
 import { ProductList } from "../components/productList.js";
 import { getData } from "./api.js";
+import { localStorageLoad, localStorageSave } from "./localStorage.js";
+import { addFavorite } from "./addFavorite.js";
+
 
 
 
@@ -18,19 +21,28 @@ export const initRouter = () => {
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData();
-      document.body.append(Header(), Catalog(main(), goods), ProductList("Список товаров", goods, main()), Footer());
+      Header(); 
+      Catalog(main(), goods); 
+      ProductList("Список товаров", goods, main());
+      Footer();
+      addFavorite(goods)
     })
 
     .on('/product', () => { 
       console.log('product')
     })
 
-    .on('/favorite', () => { 
-      document.body.append(Header(), main(Breadcrumbs()), main(Favorite()),  Footer()); 
+    .on('/favorite', async() => { 
+      const goods = await getData();
+      Header(); 
+      //main(Breadcrumbs());
+      ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
+      addFavorite(goods)
+      Footer();
     })
 
     .notFound(() => {
-      document.body.innerHTML = `Такой страницы не существует`;
+      document.body.innerHTML = `<h2>Такой страницы не существует</h2>`;
       console.log('404')
     })
 
