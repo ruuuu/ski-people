@@ -37,8 +37,8 @@ export const initRouter = () => {
       Header(); 
       //main(Breadcrumbs());
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
-      addFavorite(goods)
       Footer();
+      addFavorite(goods)
     })
 
     .notFound(() => {

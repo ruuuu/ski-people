@@ -8,8 +8,7 @@ export const Footer = () => {
   //   return '';
   // } 
   // или :
-   if(rendered)
-  {
+   if(rendered){
     return '';
   }
  
