@@ -50,9 +50,7 @@ export const initRouter = () => {
         //Slider('remove')
         done();
       },
-    },
-  
-  )
+    },)
 
     .on('/favorite', async() => { 
       const goods = await getData();
@@ -83,6 +81,7 @@ export const initRouter = () => {
       {
        leave(done){ // хук сработает когда выходим со '/'
           Catalog('remove');
+          ProductList('remove');
           done();
        },
     },)

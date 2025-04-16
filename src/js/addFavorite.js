@@ -20,7 +20,6 @@ export const addFavorite = async (data) => {
         likeButton.querySelector('svg').classList.toggle('card__like-svg--active')
 
         if(likeButton) { 
-        //likeButton.style.cssText = 'background-color: red; border: 1px solid black'
         const id = Number(likeButton.dataset.id)          // получили знач дата атрибута data-id
         const item = data.find((item) => item.id === id)
 

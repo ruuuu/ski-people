@@ -2,7 +2,7 @@ import { layout } from "./layout.js";
 import { localStorageLoad } from "../js/localStorage.js";
 
 
-
+// Вывод товаров
 let rendered = false;
 
 
@@ -49,8 +49,8 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
 
   if(rendered){ // если уже отобразили
-    console.log('asdasd')
-    return '';
+    //return '';
+    return document.querySelector('.goods');
   }
 
 
@@ -81,9 +81,10 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
 
   const catalogButtons = document.querySelector('.catalog');
-  const links = catalogButtons.querySelectorAll('.catalog__link'); // [a,a,a]
+  
 
   if(catalogButtons){
+    const links = catalogButtons.querySelectorAll('.catalog__link'); // [a,a,a]
     catalogButtons.addEventListener('click', (evt) => { // навешиваем событие на родителя(делегироваие)
       
       links.forEach((item) => item.classList.remove('catalog__link--active')); 

@@ -64,7 +64,8 @@ export const Product = (title, parent) => {
               </button>
             </div> 
 
-            <div class="swiper product__slider-thumbnails slider-thumbnails"> //маленький слайдер
+           
+            <div class="swiper product__slider-thumbnails slider-thumbnails"> 
               <div class="slider-thumbnails__list swiper-wrapper">
                 <div class="swiper-slide slider-thumbnails__item">
                   <img class="slider-thumbnails__image" src="/img/product_mini.jpg" alt="">
