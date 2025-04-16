@@ -1,7 +1,9 @@
 import { layout } from "./layout.js";
 
-let rendered = false;
 
+
+
+let rendered = false;
 
 
 export const Favorite = () => {

@@ -1,5 +1,7 @@
 import { layout } from "./layout.js";
 
+
+
 let rendered = false;
 
 export const Breadcrumbs = () => {

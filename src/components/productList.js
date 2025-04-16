@@ -41,9 +41,18 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
     return goodsItem; 
   }
 
+  if(title === 'remove'){
+    document.querySelector('.goods').remove(); // удаление элемента
+    rendered = false;
+    return ''; // выход из ProductList
+  }
 
 
   if(rendered){ // если уже отобразили
+    console.log('asdasd')
+    // document.querySelector('.goods').innerHTML='';
+    // document.querySelector('.catalog').innerHTML='';
+    // rendered=false;
     return '';
   }
 

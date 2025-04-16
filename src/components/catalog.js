@@ -1,10 +1,19 @@
 import { layout } from "./layout.js";
 
+
+
+
+
 let rendered = false;
 
-export const Catalog = (parent, data = []) => { // по умолчанию data=[]
+export const Catalog = (action, parent, data = []) => { // по умолчанию data=[]
 
- 
+  if(action === 'remove'){
+    document.querySelector('.catalog').remove(); // удаление элемента
+    rendered = false;
+    return; // выход из Catalog
+  }
+
   // if(document.querySelector('.catalog')){
   //   return '';
   // } 
@@ -29,7 +38,7 @@ export const Catalog = (parent, data = []) => { // по умолчанию data=
 
   let catalogItem = ``;
 
-  // new Set(typeList) вернет {} неповторяющихся типов и преобращуем в массив:
+  // new Set(typeList) вернет коллекцию {} неповторяющихся типов и преобразуем в массив:
   [...new Set(typeList)].forEach((type) => {
     catalogItem += `
         <li class="catalog__item">

@@ -4,13 +4,13 @@ let rendered = false;
 
 export const Footer = () => {
   
-  // if(document.querySelector('footer')){
-  //   return '';
-  // } 
-  // или :
-   if(rendered){
+  if(document.querySelector('footer')){
     return '';
-  }
+  } 
+  // или :
+  //  if(rendered){
+  //   return '';
+  // }
  
   const el = document.createElement('footer');
   el.classList.add('footer');
@@ -119,7 +119,7 @@ export const Footer = () => {
 
   el.append(layout(child, 'footer__container')); 
   
-  document.body.append(el)
+  document.body.append(el);
 
   rendered = true;
   

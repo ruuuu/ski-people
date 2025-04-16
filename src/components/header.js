@@ -9,8 +9,7 @@ export const Header = () => {
   //   return '';
   // } 
   // или:
-  if(rendered)
-  {
+  if(rendered){
     return '';
   }
 

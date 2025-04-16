@@ -22,14 +22,23 @@ export const initRouter = () => {
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData();
       Header(); 
-      Catalog(main(), goods); 
+      Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
       Footer();
-      addFavorite(goods)
-    })
+      addFavorite(goods);
+      router.updatePageLinks(); // чтоб не было перезагрузки станицы
+      },
+      {
+       leave(done){ // хук сработает когда выходим со '/'
+          Catalog('remove');
+          ProductList('remove');
+          done();
+       },
+    },)
 
     .on('/product', () => { 
-      console.log('product')
+      console.log('product');
+      router.updatePageLinks();
     })
 
     .on('/favorite', async() => { 
@@ -38,12 +47,36 @@ export const initRouter = () => {
       //main(Breadcrumbs());
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
       Footer();
-      addFavorite(goods)
-    })
+      addFavorite(goods);
+      router.updatePageLinks();
+    },
+    {
+      leave(done){ // хук сработает когда выходим со '/favorite'
+        ProductList('remove');
+        done();
+      },
+    },)
+
+    .on('/search', async (searchParam) => {  // при прееходе на "/search", запустися колбэк
+      console.log('searchParam ', searchParam)
+      const goods = await getData();
+      Header(); 
+      Catalog('', main(), goods); 
+      ProductList("Список товаров", goods, main());
+      Footer();
+      addFavorite(goods);
+      router.updatePageLinks(); // чтоб не было перезагрузки станицы
+      },
+      {
+       leave(done){ // хук сработает когда выходим со '/'
+          Catalog('remove');
+          done();
+       },
+    },)
 
     .notFound(() => {
       document.body.innerHTML = `<h2>Такой страницы не существует</h2>`;
-      console.log('404')
+      console.log('404');
     })
 
     router.resolve(); // запуск роутера
