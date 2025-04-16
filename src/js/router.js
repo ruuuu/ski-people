@@ -9,7 +9,7 @@ import { ProductList } from "../components/productList.js";
 import { getData } from "./api.js";
 import { localStorageLoad, localStorageSave } from "./localStorage.js";
 import { addFavorite } from "./addFavorite.js";
-
+import { Product } from "../components/product.js";
 
 
 
@@ -38,8 +38,21 @@ export const initRouter = () => {
 
     .on('/product', () => { 
       console.log('product');
+      Header(); 
+      Product('Горные лыжи', main()) 
+      // Slider() создать компонент
+      Footer();
       router.updatePageLinks();
-    })
+    },
+    {
+      leave(done){ // хук сработает когда выходим со '/favorite'
+        Product('remove');
+        //Slider('remove')
+        done();
+      },
+    },
+  
+  )
 
     .on('/favorite', async() => { 
       const goods = await getData();

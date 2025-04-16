@@ -18,7 +18,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
       goodsItem += `
         <li class="goods__item">
               <article class="goods__card card">
-                <a class="card__link" href="">
+                <a class="card__link" href="/product">
                   <img class="card__img" src="/img/${img}" alt="фото изображения лыж">
                 </a>
                 <button class="card__like-button" type="button" data-id="${id}">        <!-- добавили data-id -->
@@ -50,9 +50,6 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
   if(rendered){ // если уже отобразили
     console.log('asdasd')
-    // document.querySelector('.goods').innerHTML='';
-    // document.querySelector('.catalog').innerHTML='';
-    // rendered=false;
     return '';
   }
 
