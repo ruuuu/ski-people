@@ -2,7 +2,6 @@ import Navigo from "navigo";
 import { Header } from "../components/header.js";
 import { Footer } from "../components/footer.js";
 import { Catalog } from "../components/catalog.js";
-import { Favorite } from "../components/favorite.js";
 import { main } from "../components/main.js";
 import { Breadcrumbs } from "../components/breadcrumbs.js";
 import { ProductList } from "../components/productList.js";
@@ -10,11 +9,12 @@ import { getData } from "./api.js";
 import { localStorageLoad, localStorageSave } from "./localStorage.js";
 import { addFavorite } from "./addFavorite.js";
 import { Product } from "../components/product.js";
+import { search } from "./search.js";
 
 
 
 // создаем роутер:
-const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // для всех ссылок начинающихся на /
+export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // для всех ссылок начинающихся на /
 
 
 export const initRouter = () => {  
@@ -24,6 +24,7 @@ export const initRouter = () => {
       Header(); 
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
+      search();
       Footer();
       addFavorite(goods);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
@@ -40,7 +41,6 @@ export const initRouter = () => {
       console.log('product');
       Header(); 
       Product('Горные лыжи', main()) 
-      // Slider() создать компонент
       Footer();
       router.updatePageLinks();
     },
@@ -57,6 +57,7 @@ export const initRouter = () => {
       Header(); 
       //main(Breadcrumbs());
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
+      search();
       Footer();
       addFavorite(goods);
       router.updatePageLinks();
@@ -68,9 +69,10 @@ export const initRouter = () => {
       },
     },)
 
-    .on('/search', async (searchParam) => {  // при прееходе на "/search", запустися колбэк
-      console.log('searchParam ', searchParam)
-      const goods = await getData();
+    .on('/search', async (search) => {  // при прееходе на "/search", запустися колбэк
+      // console.log('searchParam ', searchParam) // { data, hashString,  params: {search: 'Лыжи'} }
+      //console.log('search ', search.params.search);
+      const goods = await getData(search.params.search);
       Header(); 
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());

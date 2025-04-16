@@ -4,8 +4,8 @@ import 'swiper/css/navigation';
 import 'swiper/css';
 
 
-export const slider = () => {
 
+export const slider = () => {
 
     const swiper = new Swiper(".slider-thumbnails", { // маленький слайдер
       spaceBetween: 10,
