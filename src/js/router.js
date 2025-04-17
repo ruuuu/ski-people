@@ -24,16 +24,15 @@ export const initRouter = () => {
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData();
+      paginationData(goods, 12);    // [ [{},{}], [] ]
       Header(); 
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
       Pagination('', main());
       //search();
-      
       Footer();
       addFavorite(goods);
-      paginationCount();
-      paginationData(goods, 12);
+      paginationCount(paginationData(goods, 12));
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {
@@ -62,13 +61,14 @@ export const initRouter = () => {
 
     .on('/favorite', async() => { 
       const goods = await getData();
+      const array = paginationData(goods, 12);  
       Header(); 
       //main(Breadcrumbs());
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
-      //search();
       Pagination('', main());
       Footer();
       addFavorite(goods);
+      paginationCount(array);
       router.updatePageLinks();
     },
     {
