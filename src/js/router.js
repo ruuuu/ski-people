@@ -10,6 +10,7 @@ import { localStorageLoad, localStorageSave } from "./localStorage.js";
 import { addFavorite } from "./addFavorite.js";
 import { Product } from "../components/product.js";
 import { search } from "./search.js";
+import { Pagination } from "../components/pagination.js";
 
 
 
@@ -24,6 +25,7 @@ export const initRouter = () => {
       Header(); 
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
+      Pagination('', main());
       search();
       Footer();
       addFavorite(goods);
@@ -33,6 +35,7 @@ export const initRouter = () => {
        leave(done){ // хук сработает когда выходим со '/'
           Catalog('remove');
           ProductList('remove');
+          Pagination('remove');
           done();
        },
     },)
@@ -58,6 +61,7 @@ export const initRouter = () => {
       //main(Breadcrumbs());
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
       search();
+      Pagination('', main());
       Footer();
       addFavorite(goods);
       router.updatePageLinks();
@@ -65,14 +69,16 @@ export const initRouter = () => {
     {
       leave(done){ // хук сработает когда выходим со '/favorite'
         ProductList('remove');
+        Pagination('remove');
         done();
       },
     },)
 
-    .on('/search', async (search) => {  // при прееходе на "/search", запустися колбэк
+    .on('/search', async (query) => {  // при прееходе на "/search", запустися колбэк
       // console.log('searchParam ', searchParam) // { data, hashString,  params: {search: 'Лыжи'} }
-      //console.log('search ', search.params.search);
-      const goods = await getData(search.params.search);
+      console.log('query in router ', query.params.search);
+
+      const goods = await getData(query.params.search);
       Header(); 
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());

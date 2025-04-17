@@ -3,6 +3,8 @@ import { API_URL } from "./const.js";
 
 
 export const getData = async (query) => { //  query то, что ввели в поле
+  
+  console.log('query in getData ', query)
 
   try{
     const response = await fetch(API_URL);
@@ -12,11 +14,9 @@ export const getData = async (query) => { //  query то, что ввели в �
       const querySearchArray = obj.filter((item) => item.name === query || item.type === query); // [{},{}]
 
       console.log('querySearchArray ', querySearchArray) 
-      return querySearchArray;
+      return querySearchArray; // выход из функции
     }
 
-   
-    //console.log('obj ', obj) 
     return obj; // [{},{}]
   }
   catch(error){

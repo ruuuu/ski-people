@@ -5,7 +5,7 @@ let rendered = false;
 export const Footer = () => {
   
   if(document.querySelector('footer')){
-    return '';
+    return ''; // выход
   } 
   // или :
   //  if(rendered){

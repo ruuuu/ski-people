@@ -6,7 +6,7 @@ import { localStorageLoad, localStorageSave } from "./localStorage.js"
 // добавлени товара Избранное:
 export const addFavorite = async (data) => {
 
-  console.log('koad localStorage')
+  
   const favoriteList = localStorageLoad('ski-people-favorite'); // полуиили из сторидж [{},{}]
 
   const list = document.querySelector('.goods__list');
@@ -14,14 +14,14 @@ export const addFavorite = async (data) => {
   if(list){
     list.addEventListener('click', (evt) => { // навешиваем на родителя(делегирование)
       
-        const likeButton = evt.target.closest('.card__like-button') //  нажали на сердечко
+      const likeButton = evt.target.closest('.card__like-button') //  нажали на сердечко
         
         
-        likeButton.querySelector('svg').classList.toggle('card__like-svg--active')
-
-        if(likeButton) { 
+      if(likeButton) { 
         const id = Number(likeButton.dataset.id)          // получили знач дата атрибута data-id
         const item = data.find((item) => item.id === id)
+
+        likeButton.querySelector('svg').classList.toggle('card__like-svg--active')
 
         if(favoriteList.length === 0){
           favoriteList.push(item);

@@ -15,7 +15,8 @@ export const Product = (title, parent) => {
   }
 
   if(rendered){
-    return document.querySelector('.product');
+    return '';
+    //return document.querySelector('.product'); // выход из Product
   }
 
 

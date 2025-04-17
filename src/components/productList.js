@@ -49,8 +49,8 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
 
   if(rendered){ // если уже отобразили
-    //return '';
-    return document.querySelector('.goods');
+    return '';
+    //return document.querySelector('.goods'); // выход из ProductList
   }
 
 
@@ -67,7 +67,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
       <h2 class="goods__title">${title}</h2>
       <ul class="goods__list">
         ${goodsItems}
-       </ul>
+      </ul>
   `;
 
 

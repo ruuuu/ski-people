@@ -18,6 +18,7 @@ export const main  = () => {
   
 
   if(rendered){
+    //return '';
     return document.querySelector('main');
   }
 

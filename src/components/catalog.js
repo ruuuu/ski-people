@@ -50,9 +50,9 @@ export const Catalog = (action, parent, data = []) => { // по умолчани
 
 
   const child = `
-       <ul class="catalog__list">
-          ${catalogItem}
-      </ul>  
+    <ul class="catalog__list">
+      ${catalogItem}
+    </ul>  
   `;
 
 
