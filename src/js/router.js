@@ -9,7 +9,6 @@ import { getData } from "./api.js";
 import { localStorageLoad, localStorageSave } from "./localStorage.js";
 import { addFavorite } from "./addFavorite.js";
 import { Product } from "../components/product.js";
-import { search } from "./search.js";
 import { Pagination } from "../components/pagination.js";
 import { paginationCount } from "./paginationCount.js";
 import { paginationData } from "./paginationData.js";
@@ -45,8 +44,8 @@ export const initRouter = () => {
     },)
 
     .on('/product', () => { 
-      console.log('product');
       Header(); 
+      Breadcrumbs('', main(), '');
       Product('Горные лыжи', main()) 
       Footer();
       router.updatePageLinks();
@@ -54,7 +53,7 @@ export const initRouter = () => {
     {
       leave(done){ // хук сработает когда выходим со '/favorite'
         Product('remove');
-        //Slider('remove')
+        Breadcrumbs('remove', main());
         done();
       },
     },)
@@ -63,7 +62,7 @@ export const initRouter = () => {
       const goods = await getData();
       const array = paginationData(goods, 12);  
       Header(); 
-      //main(Breadcrumbs());
+      Breadcrumbs('', main(), '');
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
       Pagination('', main());
       Footer();
@@ -73,6 +72,7 @@ export const initRouter = () => {
     },
     {
       leave(done){ // хук сработает когда выходим со '/favorite'
+        Breadcrumbs('remove', main());
         ProductList('remove');
         Pagination('remove');
         done();

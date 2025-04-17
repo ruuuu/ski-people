@@ -4,13 +4,15 @@ import { layout } from "./layout.js";
 
 let rendered = false;
 
-export const Breadcrumbs = () => {
+export const Breadcrumbs = (action, parent, data) => {
 
- 
-  // if(document.querySelector('.breadcrumb')){
-  //   return '';
-  // } 
-  // или:
+
+  if(action === 'remove'){
+    document.querySelector('.breadcrumb').remove(); 
+    rendered = false;
+    return; // выход 
+  }
+
   if(rendered){
     return '';
   }
@@ -39,6 +41,8 @@ export const Breadcrumbs = () => {
 
 
   el.append(layout(child, "breadcrumb__container")); 
+
+  parent.append(el);
   
   rendered = true;
   
