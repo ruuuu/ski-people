@@ -2,6 +2,7 @@ import { API_URL } from "./const.js";
 
 
 
+
 export const getData = async (query) => { //  query то, что ввели в поле
   
   console.log('query in getData ', query)
@@ -10,10 +11,10 @@ export const getData = async (query) => { //  query то, что ввели в �
     const response = await fetch(API_URL);
     const obj = await response.json();
 
-    if(query != '' && query != null){
-      const querySearchArray = obj.filter((item) => item.name === query || item.type === query); // [{},{}]
-
-      console.log('querySearchArray ', querySearchArray) 
+    if(query){
+      const result = query.replace(/\+/g, " ");
+      const querySearchArray = obj.filter((item) => item.name.includes(result) || item.type.includes(query)); // [{},{}]
+     // console.log('querySearchArray ', querySearchArray) 
       return querySearchArray; // выход из функции
     }
 

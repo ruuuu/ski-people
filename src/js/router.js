@@ -11,6 +11,8 @@ import { addFavorite } from "./addFavorite.js";
 import { Product } from "../components/product.js";
 import { search } from "./search.js";
 import { Pagination } from "../components/pagination.js";
+import { paginationCount } from "./paginationCount.js";
+import { paginationData } from "./paginationData.js";
 
 
 
@@ -26,9 +28,12 @@ export const initRouter = () => {
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
       Pagination('', main());
-      search();
+      //search();
+      
       Footer();
       addFavorite(goods);
+      paginationCount();
+      paginationData(goods, 12);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {
@@ -60,7 +65,7 @@ export const initRouter = () => {
       Header(); 
       //main(Breadcrumbs());
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
-      search();
+      //search();
       Pagination('', main());
       Footer();
       addFavorite(goods);
