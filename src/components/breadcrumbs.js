@@ -4,7 +4,7 @@ import { layout } from "./layout.js";
 
 let rendered = false;
 
-export const Breadcrumbs = (action, parent, data) => {
+export const Breadcrumbs = (action, parent, data) => { // async
 
 
   if(action === 'remove'){
@@ -23,15 +23,17 @@ export const Breadcrumbs = (action, parent, data) => {
 
   const listItems = data.map((item) => 
     ` <li class="breadcrumb__item">
-        <a class="breadcrumb__link" href="/">Главная</a>
+        <a class="breadcrumb__link" href="${item.href}">${item.text}</a>
       </li>
     `
-)
+  );
+
+  console.log('listItems inbreadcrumb ', listItems)
   
   const child = `
         <nav class="breadcrumb__navigation">
           <ul class="breadcrumb__list">
-            ${listItems}
+            ${listItems.join('')}
           </ul>
         </nav>
       </div>

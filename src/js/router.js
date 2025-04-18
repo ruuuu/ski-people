@@ -23,7 +23,6 @@ export const initRouter = () => {
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
-      
       Header(); 
       Catalog('', main(), goods[0]); 
       ProductList("Список товаров", goods[0], main());
@@ -44,12 +43,12 @@ export const initRouter = () => {
 
     .on('/product', () => { 
       Header(); 
-      // Breadcrumbs('', main(), 
-      //   [{ 'text': 'Главная', 'href': '/' }, 
-      //    { 'text': 'Лыжи', 'href': '/ski' },
-      //    { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
-      //   ]
-      // );
+      Breadcrumbs('', main(), 
+        [{ 'text': 'Главная', 'href': '/' }, 
+         { 'text': 'Лыжи', 'href': '/ski' },
+         { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
+        ]
+      );
       Product('Горные лыжи', main()) 
       Footer();
       router.updatePageLinks();
@@ -57,7 +56,7 @@ export const initRouter = () => {
     {
       leave(done){ // хук сработает когда выходим со '/favorite'
         Product('remove');
-        Breadcrumbs('remove', main());
+        Breadcrumbs('remove');
         done();
       },
     },)
@@ -65,7 +64,12 @@ export const initRouter = () => {
     .on('/favorite', async() => { 
       const goods = await getData();
       Header(); 
-      //Breadcrumbs('', main(), '');
+      Breadcrumbs('', main(), 
+        [{ 'text': 'Главная', 'href': '/' }, 
+        { 'text': 'Лыжи', 'href': '/ski' },
+        { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
+        ]
+     );
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
       Pagination('', main(), goods);
       paginationCount(goods);
@@ -75,7 +79,7 @@ export const initRouter = () => {
     },
     {
       leave(done){ // хук сработает когда выходим со '/favorite'
-        //Breadcrumbs('remove', main());
+        Breadcrumbs('remove');
         ProductList('remove');
         Pagination('remove');
         done();
@@ -83,9 +87,6 @@ export const initRouter = () => {
     },)
 
     .on('/search', async (query) => {  // при прееходе на "/search", запустися колбэк
-      // console.log('searchParam ', searchParam) // { data, hashString,  params: {search: 'Лыжи'} }
-      //console.log('query in router ', query.params.search);
-
       const goods = await getData(query.params.search);
       Header(); 
       Catalog('', main(), goods); 
