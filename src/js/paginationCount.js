@@ -1,25 +1,29 @@
-import { ProductList } from "../components/productList.js";
-import { main } from "../components/main.js";
 
 
 
-export const paginationCount = (data) => {  // [[{},{}], [], []]
+
+export const paginationCount = (data) => {  // [[{},{}], [], []] по 12 элементов в массивах
+
+  console.log('data in paginationCount ', data)
 
   const buttons = document.querySelectorAll('.count-text__button');
+ 
   const maxCount = data.length;
   let currentCount = 0;
 
 
 
+  
   const paginationActiveElements = (index) => {
+    console.log('index ', index);
 
     const paginationElements = document.querySelectorAll('.pagination__item');
 
     paginationElements.forEach((item) => {
-      item.classList.remove('pagination__item--ective');
+      item.classList.remove('pagination__item--active');
     });
 
-    paginationElements[index].classList.add('pagination__item--ective');
+    paginationElements[index].classList.add('pagination__item--active');
   }
   
    
@@ -27,11 +31,11 @@ export const paginationCount = (data) => {  // [[{},{}], [], []]
 
 
   buttons[0].addEventListener('click', (evt) => {
-
-    if(currentCount > 0 && currentCount <= maxCount){
+    
+    if(currentCount > 0 && currentCount < maxCount-1){
       currentCount--;
       paginationActiveElements(currentCount);
-      //ProductList('', data, main());
+      
     }
   });
 
@@ -39,10 +43,12 @@ export const paginationCount = (data) => {  // [[{},{}], [], []]
 
   buttons[1].addEventListener('click', (evt) => {
 
-    if(currentCount >= 0 && currentCount <= maxCount-1){
+    console.log('нажали на праую кнопку ');
+
+    if(currentCount >= 0 && currentCount < maxCount-1){
       currentCount++;
       paginationActiveElements(currentCount);
-      //ProductList('', data, main());
+      
     }
   });
 }

@@ -3,7 +3,7 @@ import { layout } from "./layout.js";
 let rendered = false;
 
 
-export const Pagination = (action, parent) => {
+export const Pagination = (action, parent, data) => {
   
   
     if(action === 'remove'){

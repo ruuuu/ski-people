@@ -23,15 +23,14 @@ export const initRouter = () => {
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData();
-      paginationData(goods, 12);    // [ [{},{}], [] ]
+      //paginationData(goods, 12)
       Header(); 
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
-      Pagination('', main());
-      //search();
+      Pagination('', main(), goods);
+      paginationCount(paginationData(goods, 12));
       Footer();
       addFavorite(goods);
-      paginationCount(paginationData(goods, 12));
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {
@@ -45,7 +44,12 @@ export const initRouter = () => {
 
     .on('/product', () => { 
       Header(); 
-      Breadcrumbs('', main(), '');
+      Breadcrumbs('', main(), 
+        [{ 'text': 'Главная', 'href': '/' }, 
+         { 'text': 'Лыжи', 'href': '/ski' },
+         { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
+        ]
+      );
       Product('Горные лыжи', main()) 
       Footer();
       router.updatePageLinks();
@@ -60,14 +64,14 @@ export const initRouter = () => {
 
     .on('/favorite', async() => { 
       const goods = await getData();
-      const array = paginationData(goods, 12);  
+     // const array = paginationData(goods, 12);  
       Header(); 
       Breadcrumbs('', main(), '');
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
       Pagination('', main());
       Footer();
       addFavorite(goods);
-      paginationCount(array);
+      //paginationCount(array);
       router.updatePageLinks();
     },
     {
@@ -81,7 +85,7 @@ export const initRouter = () => {
 
     .on('/search', async (query) => {  // при прееходе на "/search", запустися колбэк
       // console.log('searchParam ', searchParam) // { data, hashString,  params: {search: 'Лыжи'} }
-      console.log('query in router ', query.params.search);
+      //console.log('query in router ', query.params.search);
 
       const goods = await getData(query.params.search);
       Header(); 

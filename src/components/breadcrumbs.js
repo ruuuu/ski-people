@@ -21,19 +21,17 @@ export const Breadcrumbs = (action, parent, data) => {
   const el = document.createElement('div');
   el.classList.add('breadcrumb')
 
+  const listItems = data.map((item) => 
+    ` <li class="breadcrumb__item">
+        <a class="breadcrumb__link" href="/">Главная</a>
+      </li>
+    `
+)
   
   const child = `
         <nav class="breadcrumb__navigation">
           <ul class="breadcrumb__list">
-            <li class="breadcrumb__item">
-              <a class="breadcrumb__link" href="/">Главная</a>
-            </li>
-            <li class="breadcrumb__item">
-              <a class="breadcrumb__link" href="">Лыжи</a>
-            </li>
-            <li class="breadcrumb__item">
-              <a class="breadcrumb__link" href="">Горные лыжи</a>
-            </li>
+            ${listItems}
           </ul>
         </nav>
       </div>
