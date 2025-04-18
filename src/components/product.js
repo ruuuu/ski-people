@@ -88,7 +88,7 @@ export const Product = (title, parent, data, id) => {
           </div> 
 
           <div class="product__info">
-            <p class="product__info-price">${objProduct.price}&nbsp;000&nbsp;₽</p>
+            <p class="product__info-price">${objProduct.price}&nbsp;₽</p>
             <p class="product__info-id">арт.&nbsp;${objProduct.id}</p>
             <h3 class="product__info-title">Общие характеристики</h3>
             <table class="product__info-table product__table">
