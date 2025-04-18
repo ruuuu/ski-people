@@ -85,10 +85,11 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
   if(catalogButtons){
     const links = catalogButtons.querySelectorAll('.catalog__link'); // [a,a,a]
+    
     catalogButtons.addEventListener('click', (evt) => { // навешиваем событие на родителя(делегироваие)
       
       links.forEach((item) => item.classList.remove('catalog__link--active')); 
-      if(evt.target.closest('a')){ // если элемент/его родитель есть ссылка
+      if(evt.target.closest('a')){ // если элемент/его родителя есть ссылка
         evt.target.classList.add('catalog__link--active')
       }
 

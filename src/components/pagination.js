@@ -22,25 +22,21 @@ export const Pagination = (action, parent, data) => {
   
     
     const el = document.createElement('div');
-    el.classList.add('pagination')
+    el.classList.add('pagination');
+
+    const listItems = data.map((item) => `<li class="pagination__item"></li>`).join('');
+
+    console.log('listItems ', listItems)
+   
   
     
     const child = `
         <ul class="pagination__list">
-          <li class="pagination__item pagination__item--active">
-
-          </li>
-          <li class="pagination__item">
-
-          </li>
-          <li class="pagination__item">
-
-          </li>
+          ${listItems}
         </ul>
-
         <div class="pagination__count count-text">
           <button class="count-text__button" type="button">&lt;</button>
-          <p class="count-text__text">12 из 31</p>
+          <p class="count-text__text">12 из ${data.length}</p>
           <button class="count-text__button" type="button">&gt;</button>
         </div> 
     `;

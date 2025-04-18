@@ -1,14 +1,14 @@
 
 
 
-
 export const paginationCount = (data) => {  // [[{},{}], [], []] по 12 элементов в массивах
 
   console.log('data in paginationCount ', data)
 
   const buttons = document.querySelectorAll('.count-text__button');
  
-  const maxCount = data.length;
+  const maxCount = data.length; // 9
+  
   let currentCount = 0;
 
 
@@ -29,26 +29,23 @@ export const paginationCount = (data) => {  // [[{},{}], [], []] по 12 эле�
    
 
 
-
-  buttons[0].addEventListener('click', (evt) => {
+  buttons[0].addEventListener('click', () => {
     
     if(currentCount > 0 && currentCount < maxCount-1){
       currentCount--;
       paginationActiveElements(currentCount);
-      
+      console.log('data[currentCount] левая ', data[currentCount])
     }
   });
 
 
 
-  buttons[1].addEventListener('click', (evt) => {
-
-    console.log('нажали на праую кнопку ');
+  buttons[1].addEventListener('click', () => {
 
     if(currentCount >= 0 && currentCount < maxCount-1){
       currentCount++;
       paginationActiveElements(currentCount);
-      
+      console.log('data[currentCount] правая ', data[currentCount])
     }
   });
 }

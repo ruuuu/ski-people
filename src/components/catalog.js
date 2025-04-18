@@ -24,29 +24,45 @@ export const Catalog = (action, parent, data = []) => { // по умолчани
 
   
   const el = document.createElement('div');
-  el.classList.add('catalog')
+  el.classList.add('catalog');
 
   
   
   const typeList = [];
 
-  data.map(({ type }) => {
+  data.map(({ type }) => { // деструктурировали item
     typeList.push(type);
-  })
+  });
   
-
 
   let catalogItem = ``;
 
-  // new Set(typeList) вернет коллекцию {} неповторяющихся типов и преобразуем в массив:
+  // new Set(typeList) вернет коллекцию {} неповторяющихся типов. Делаем копию коллекции  и преобразуем в массив:
   [...new Set(typeList)].forEach((type) => {
     catalogItem += `
         <li class="catalog__item">
           <a class="catalog__link" href="#">${type}</a>
         </li>
-    `
+      `
   });
 
+  // Или так:
+  // const typeList = new Set();
+  // data.forEach(({ type }) => {
+  //   typeList.add(type);
+  // }); 
+
+  // console.log('typeList ', typeList);
+
+  // let catalogItem = ``;
+
+  // typeList.forEach(({ type }) => {
+  //   catalogItem += `
+  //     <li class="catalog__item">
+  //       <a class="catalog__link" href="#">${type}</a>
+  //     </li>
+  //    `
+  // });
 
 
   const child = `

@@ -22,13 +22,13 @@ export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // д�
 export const initRouter = () => {  
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
-      const goods = await getData();
-      //paginationData(goods, 12)
+      const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
+      
       Header(); 
-      Catalog('', main(), goods); 
-      ProductList("Список товаров", goods, main());
+      Catalog('', main(), goods[0]); 
+      ProductList("Список товаров", goods[0], main());
       Pagination('', main(), goods);
-      paginationCount(paginationData(goods, 12));
+      paginationCount(goods);
       Footer();
       addFavorite(goods);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
@@ -44,12 +44,12 @@ export const initRouter = () => {
 
     .on('/product', () => { 
       Header(); 
-      Breadcrumbs('', main(), 
-        [{ 'text': 'Главная', 'href': '/' }, 
-         { 'text': 'Лыжи', 'href': '/ski' },
-         { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
-        ]
-      );
+      // Breadcrumbs('', main(), 
+      //   [{ 'text': 'Главная', 'href': '/' }, 
+      //    { 'text': 'Лыжи', 'href': '/ski' },
+      //    { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
+      //   ]
+      // );
       Product('Горные лыжи', main()) 
       Footer();
       router.updatePageLinks();
@@ -64,19 +64,18 @@ export const initRouter = () => {
 
     .on('/favorite', async() => { 
       const goods = await getData();
-     // const array = paginationData(goods, 12);  
       Header(); 
-      Breadcrumbs('', main(), '');
+      //Breadcrumbs('', main(), '');
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
-      Pagination('', main());
+      Pagination('', main(), goods);
+      paginationCount(goods);
       Footer();
       addFavorite(goods);
-      //paginationCount(array);
       router.updatePageLinks();
     },
     {
       leave(done){ // хук сработает когда выходим со '/favorite'
-        Breadcrumbs('remove', main());
+        //Breadcrumbs('remove', main());
         ProductList('remove');
         Pagination('remove');
         done();

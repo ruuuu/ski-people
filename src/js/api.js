@@ -1,11 +1,10 @@
 import { API_URL } from "./const.js";
-
+import { paginationData } from "./paginationData.js";
 
 
 
 export const getData = async (query) => { //  query то, что ввели в поле
   
-  console.log('query in getData ', query)
 
   try{
     const response = await fetch(API_URL);
@@ -14,11 +13,11 @@ export const getData = async (query) => { //  query то, что ввели в �
     if(query){
       const result = query.replace(/\+/g, " ");
       const querySearchArray = obj.filter((item) => item.name.includes(result) || item.type.includes(query)); // [{},{}]
-     // console.log('querySearchArray ', querySearchArray) 
-      return querySearchArray; // выход из функции
+      return paginationData(querySearchArray, 12); // выход из функции
     }
 
-    return obj; // [{},{}]
+    console.log('paginationData(obj, 12) in api ', paginationData(obj, 12))
+    return paginationData(obj, 12); // [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
   }
   catch(error){
     console.error()
