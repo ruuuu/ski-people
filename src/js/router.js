@@ -66,8 +66,7 @@ export const initRouter = () => {
       Header(); 
       Breadcrumbs('', main(), 
         [{ 'text': 'Главная', 'href': '/' }, 
-        { 'text': 'Лыжи', 'href': '/ski' },
-        { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
+         { 'text': 'Избранное', 'href': '/favorite' },
         ]
      );
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
