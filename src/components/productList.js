@@ -18,7 +18,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
       goodsItem += `
         <li class="goods__item">
               <article class="goods__card card">
-                <a class="card__link" href="/product">
+                <a class="card__link" href="/product?id=${id}">
                   <img class="card__img" src="/img/${img}" alt="фото изображения лыж">
                 </a>
                 <button class="card__like-button" type="button" data-id="${id}">        <!-- добавили data-id -->

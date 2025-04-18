@@ -41,12 +41,16 @@ export const initRouter = () => {
        },
     },)
 
-    .on('/product', () => { 
+    .on('/product', async (id) => {  // id получаем из урла /product?id=${id}
+      const goods = await getData(); 
+      const obj = goods.flat(Infinity).find((item) => item.id === Number(id.params.id)); //  из массива масивов [[],[],[]] делаем один большой массив
+      //console.log('obj ', obj);
+
       Header(); 
       Breadcrumbs('', main(), 
         [{ 'text': 'Главная', 'href': '/' }, 
-         { 'text': 'Лыжи', 'href': '/ski' },
-         { 'text': 'Горные Лыжи', 'href': '/mountains_ski' }
+         { 'text': obj.type, 'href': '#' },
+         { 'text': obj.name, 'href': '#' }
         ]
       );
       Product('Горные лыжи', main()) 
