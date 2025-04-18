@@ -23,7 +23,7 @@ export const Product = (title, parent, data, id) => {
   const elProduct = document.createElement('section');
   elProduct.classList.add('product')
 
-  const objProduct = data.flat(Infinity).find((item) => item.id === Number(id.params.id));
+  const objProduct = data.flat(Infinity).find((item) => item.id === Number(id));
   console.log('objProduct ', objProduct)
 
   const child = `

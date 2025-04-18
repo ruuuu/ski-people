@@ -53,7 +53,7 @@ export const initRouter = () => {
          { 'text': obj.name, 'href': '#' }
         ]
       );
-      Product('Горные лыжи', main(), goods, id); 
+      Product(obj.name, main(), goods, id.params.id); 
       Footer();
       router.updatePageLinks();
     },
