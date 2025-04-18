@@ -41,7 +41,7 @@ export const initRouter = () => {
        },
     },)
 
-    .on('/product', async (id) => {  // id получаем из урла /product?id=${id}
+    .on('/product', async (id) => {  // id товара получаем пр переходе на урл /product?id=${id}
       const goods = await getData(); 
       const obj = goods.flat(Infinity).find((item) => item.id === Number(id.params.id)); //  из массива масивов [[],[],[]] делаем один большой массив
       //console.log('obj ', obj);
@@ -49,11 +49,11 @@ export const initRouter = () => {
       Header(); 
       Breadcrumbs('', main(), 
         [{ 'text': 'Главная', 'href': '/' }, 
-         { 'text': obj.type, 'href': '#' },
+         { 'text': obj.type, 'href':  '/favorite'}, // ProductList("Список товаров", goods.flat(Infinity).filter((item) => item.type === obj.type), main())
          { 'text': obj.name, 'href': '#' }
         ]
       );
-      Product('Горные лыжи', main()) 
+      Product('Горные лыжи', main(), goods, id); 
       Footer();
       router.updatePageLinks();
     },

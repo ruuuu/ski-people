@@ -16,7 +16,7 @@ export const slider = () => {
       modules: [Navigation, Pagination],
     });
     
-    const  swiper2 = new Swiper(".product__slider", { 
+    const swiper2 = new Swiper(".product__slider", { 
       spaceBetween: 10,
       navigation: {
         nextEl: ".product__slider-arrow--next",
@@ -27,6 +27,5 @@ export const slider = () => {
       },
       modules: [ Navigation, Thumbs]
     });
-
 
 }

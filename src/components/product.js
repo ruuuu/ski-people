@@ -5,8 +5,8 @@ import { layout } from "./layout.js";
 let rendered = false;
 
 
-export const Product = (title, parent) => {
-
+export const Product = (title, parent, data, id) => {
+  console.log(id)
 
   if(title === 'remove'){
     document.querySelector('.product').remove(); // удаление элемента
@@ -23,13 +23,16 @@ export const Product = (title, parent) => {
   const elProduct = document.createElement('section');
   elProduct.classList.add('product')
 
+  const objProduct = data.flat(Infinity).find((item) => item.id === Number(id.params.id));
+  console.log('objProduct ', objProduct)
 
   const child = `
         <h2 class="product__title">${title}</h2>
 
         <div class="product__description"> 
           <div class="product__slider-wrapper"> 
-            <div class="swiper product__slider"> //большой слайдер 
+          <!-- большой слайдер -->
+            <div class="swiper product__slider"> 
               <div class="swiper-wrapper product__slider-image slider-image">
                 <div class="swiper-slide slider-image__slide">
                   <img class="slider-image__img" src="/img/product.jpg">
@@ -65,7 +68,7 @@ export const Product = (title, parent) => {
               </button>
             </div> 
 
-           
+            <!-- маленький слайдер -->
             <div class="swiper product__slider-thumbnails slider-thumbnails"> 
               <div class="slider-thumbnails__list swiper-wrapper">
                 <div class="swiper-slide slider-thumbnails__item">
@@ -85,33 +88,33 @@ export const Product = (title, parent) => {
           </div> 
 
           <div class="product__info">
-            <p class="product__info-price">5&nbsp;000&nbsp;₽</p>
-            <p class="product__info-id">арт.&nbsp;84348945757</p>
+            <p class="product__info-price">${objProduct.price}&nbsp;000&nbsp;₽</p>
+            <p class="product__info-id">арт.&nbsp;${objProduct.id}</p>
             <h3 class="product__info-title">Общие характеристики</h3>
             <table class="product__info-table product__table">
               <tr class="product__table-row">
                 <td class="product__table-item">Коллекция</td>
-                <td class="product__table-item">Snow</td>
+                <td class="product__table-item">${objProduct.collection}</td>
               </tr>
               <tr class="product__table-row">
                 <td class="product__table-item">Производитель</td>
-                <td class="product__table-item">Россия</td>
+                <td class="product__table-item">${objProduct.manufacturer}</td>
               </tr>
               <tr class="product__table-row">
                 <td class="product__table-item">Гарантия</td>
-                <td class="product__table-item">18 мес</td>
+                <td class="product__table-item">${objProduct.warranty}</td>
               </tr>
               <tr class="product__table-row">
                 <td class="product__table-item">Срок службы</td>
-                <td class="product__table-item">5 лет</td>
+                <td class="product__table-item">${objProduct.life}</td>
               </tr>
               <tr class="product__table-row">
                 <td class="product__table-item">Цвет</td>
-                <td class="product__table-item">Синий</td>
+                <td class="product__table-item">${objProduct.color}</td>
               </tr>
               <tr class="product__table-row">
                 <td class="product__table-item">Макс. нагрузка</td>
-                <td class="product__table-item">130 кг</td>
+                <td class="product__table-item">${objProduct.max_weight}</td>
               </tr>
             </table>
           <div class="info-buttons">
