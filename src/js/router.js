@@ -13,6 +13,7 @@ import { Pagination } from "../components/pagination.js";
 import { paginationCount } from "./paginationCount.js";
 import { paginationData } from "./paginationData.js";
 import { slider } from './slider.js';
+import { Cart } from "../components/cart.js";
 
 
 // создаем роутер:
@@ -103,6 +104,20 @@ export const initRouter = () => {
        leave(done){ // хук сработает когда выходим со '/'
           Catalog('remove');
           ProductList('remove');
+          done();
+       },
+    },)
+
+
+    .on('/cart', async () => {  
+      Header(); 
+      Cart('',  main());
+      Footer();
+      router.updatePageLinks(); // чтоб не было перезагрузки станицы
+      },
+      {
+       leave(done){ // хук сработает когда выходим со '/'
+          Cart('remove');
           done();
        },
     },)
