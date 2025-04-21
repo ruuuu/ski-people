@@ -10,13 +10,13 @@ import 'swiper/css';
 
 export const slider = () => {
 
-    const swiper = new Swiper(".slider-thumbnails", { 
+    const swiper = new Swiper(".slider-thumbs", { 
       spaceBetween: 10,
       slidesPerView: 4,
       modules: [Navigation, Pagination],
     });
     
-    const swiper2 = new Swiper(".product__slider", { 
+    const swiper2 = new Swiper(".product__slider-main", { 
       spaceBetween: 10,
       navigation: {
         nextEl: ".product__slider-arrow--next",

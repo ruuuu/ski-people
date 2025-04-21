@@ -34,43 +34,67 @@
         }
     }
 
-    &__slider-wrapper {
+    &__slider {
+        min-width: 0;
+        flex-grow: 1;
+
+        // @media (min-width: 1024px) {
+        //     width: 620px;
+
+        // }
+
+        // @media (min-width: 1440px) {
+        //     width: 832px;
+
+        // }
+    }
+
+    &__slider-main {
+        // большой слайдер
+        position: relative;
+        margin-bottom: 14px;
 
         @media (min-width: 1024px) {
-            width: 620px;
-
+            margin-bottom: 12px;
         }
 
-        @media (min-width: 1440px) {
-            width: 832px;
-
+        @media (min-width: 1200px) {
+            margin-bottom: 16px;
         }
+
     }
 
     &__slider-image {
         // большая фотка слайдера
         width: 100%;
-        min-height: 236px;
-        margin-bottom: 32px;
+        border-radius: 16px;
+        aspect-ratio: 836/688;
+        overflow: hidden;
         object-fit: cover;
 
-        @media (min-width: 768px) {
-            margin-bottom: 14px;
-        }
+        // @media (min-width: 768px) {
+        //     margin-bottom: 14px;
+        // }
 
-        @media (min-width: 1024px) {}
+        // @media (min-width: 1024px) {}
 
-        @media (min-width: 1440px) {
-            margin-bottom: 16px;
-        }
+        // @media (min-width: 1440px) {
+        //     margin-bottom: 16px;
+        // }
     }
 
     &__slider-arrow {
         position: absolute;
-        z-index: 10;
         top: 50%;
         transform: translateY(-50%); //  центруем по вертикали стрелку
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.4);
+        z-index: 10;
 
         &--next {
             right: 16px;
@@ -93,7 +117,7 @@
         color: #1c1c1c;
 
         @media (min-width: 1024px) {
-            flex-grow: 1;
+            min-width: 408px;
         }
     }
 
@@ -145,30 +169,22 @@
 }
 
 
-.slider-thumbnails {
-    display: none;
+.slider-thumbs {
 
-    @media (min-width: 768px) {
-        display: flex;
-        gap: 14px;
-    }
 
-    @media (min-width: 1024px) {
-        gap: 12px;
-    }
-
-    @media (min-width: 1440px) {
-        gap: 16px;
+    .swiper-wrapper {
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
 
     &__item {
-        width: 100%;
         border-radius: 16px;
         overflow: hidden;
+        aspect-ratio: 196/162;
     }
 
     &__image {
-        //  Маленька фотка слайдера
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -198,7 +214,7 @@
     }
 }
 
-.slider-image__slide {
-    overflow: hidden;
-    border-radius: 16px;
-}
+// .slider-image__slide {
+//     overflow: hidden;
+//     border-radius: 16px;
+// }

@@ -6,13 +6,12 @@ import './style.scss';
 // import 'swiper/css/navigation';
 // import 'swiper/css';
 import { initRouter } from './js/router.js';
-import { slider } from './js/slider.js';
+
 
 
 
 const init = () => {
   initRouter()
-  slider();
 };
 
 init(); // начало отсюда

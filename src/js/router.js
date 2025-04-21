@@ -12,7 +12,7 @@ import { Product } from "../components/product.js";
 import { Pagination } from "../components/pagination.js";
 import { paginationCount } from "./paginationCount.js";
 import { paginationData } from "./paginationData.js";
-
+import { slider } from './slider.js';
 
 
 // создаем роутер:
@@ -30,7 +30,7 @@ export const initRouter = () => {
       paginationCount(goods);
       Footer();
       addFavorite(goods);
-      router.updatePageLinks(); // чтоб не было перезагрузки станицы
+      router.updatePageLinks(); // чтоб не было перезагрузки станицы(отслеживает новые роуты в урле)
       },
       {
        leave(done){ // хук сработает когда выходим со '/'
@@ -54,6 +54,7 @@ export const initRouter = () => {
         ]
       );
       Product(obj.name, main(), goods, id.params.id); 
+      slider();
       Footer();
       router.updatePageLinks();
     },
