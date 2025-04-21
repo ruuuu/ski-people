@@ -1,4 +1,6 @@
 import { layout } from "./layout.js";
+import { API_URL_IMG } from "../js/const.js";
+import { localStorageLoad } from "../js/localStorage.js";
 
 
 
@@ -29,15 +31,13 @@ export const Product = (title, parent, data, id) => {
   
   const mainImage = objProduct.mainImage;
   const thumbsImage = objProduct.thumbsImage;
-  let mainImageItems = '';
+ 
 
-  mainImage.forEach((mainImg) => {
-    mainImageItems += `
-      <div class="swiper-slide">
-        <img class="product__slider-image" src="/img/${mainImg}">
-      </div>
-    `;
-  });
+  const favoriteList = localStorageLoad('ski-people-favorite'); // полуиили из сторидж [{},{}]
+  const favoriteProduct = favoriteList.find((item) =>  item.id === Number(id) );
+  
+
+  
 
   const child = `
         <h2 class="product__title">${title}</h2>
@@ -47,9 +47,15 @@ export const Product = (title, parent, data, id) => {
           <!-- большой слайдер -->
             <div class="swiper product__slider-main"> 
               <div class="swiper-wrapper">
-               ${mainImageItems}
+                ${mainImage.map((itemImg) => {
+                  return `
+                    <div class="swiper-slide">
+                      <img class="product__slider-image" src="${API_URL_IMG+'/'+itemImg}">
+                    </div>
+                  `
+              }).join('')}
               </div> 
-
+             
               <button class="product__slider-arrow product__slider-arrow--prev">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="32" height="32" rx="16" fill="white" fill-opacity="0.4" />
@@ -73,21 +79,17 @@ export const Product = (title, parent, data, id) => {
             <!-- маленький слайдер -->
             <div class="swiper product__slider-thumbs slider-thumbs"> 
               <div class="swiper-wrapper">
-                <div class="swiper-slide slider-thumbs__item">
-                  <img class="slider-thumbs__image" src="/img/protection1.png" alt="">
-                </div>
-                <div class="swiper-slide slider-thumbs__item">
-                  <img class="slider-thumbs__image" src="/img/protection2.png" alt="">
-                </div>
-                <div class="swiper-slide slider-thumbs__item">
-                  <img class="slider-thumbs__image" src="/img/protection3.png" alt="">
-                </div>
-                <div class="swiper-slide slider-thumbs__item">
-                  <img class="slider-thumbs__image" src="/img/protection4.png" alt="">
-                </div>
+               ${thumbsImage.map((thumbsImg) => {
+                  return `
+                    <div class="swiper-slide slider-thumbs__item">
+                      <img class="slider-thumbs__image" src="${API_URL_IMG+'/'+thumbsImg}" alt="">
+                    </div>
+                  `
+                }).join('')}
               </div>
             </div>
-          </div> 
+          </div>
+         
 
           <div class="product__info">
             <p class="product__info-price">${objProduct.price}&nbsp;₽</p>
@@ -122,10 +124,10 @@ export const Product = (title, parent, data, id) => {
           <div class="info-buttons">
             <button class="info-buttons__to-cart" type="button">В Корзину</button>
             <button class="info-buttons__like">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg class='card__like-svg ${favoriteProduct ? 'card__like-svg--active': ''}' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M8.41301 13.8733C8.18634 13.9533 7.81301 13.9533 7.58634 13.8733C5.65301 13.2133 1.33301 10.46 1.33301 5.79332C1.33301 3.73332 2.99301 2.06665 5.03967 2.06665C6.25301 2.06665 7.32634 2.65332 7.99967 3.55998C8.67301 2.65332 9.75301 2.06665 10.9597 2.06665C13.0063 2.06665 14.6663 3.73332 14.6663 5.79332C14.6663 10.46 10.3463 13.2133 8.41301 13.8733Z"
-                  fill="white" stroke="#1C1C1C" stroke-linecap="round" stroke-linejoin="round" />
+                  fill="currentColor" stroke="#1C1C1C" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
           </div>
