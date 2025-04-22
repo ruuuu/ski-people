@@ -24,6 +24,8 @@ export const initRouter = () => {
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
+      console.log('goods[0] ', goods[0]);
+
       Header(); 
       Catalog('', main(), goods[0]); 
       ProductList("Список товаров", goods[0], main());
@@ -92,7 +94,11 @@ export const initRouter = () => {
     },)
 
     .on('/search', async (query) => {  // при прееходе на "/search", запустися колбэк
+      console.log('query.params.search ', query.params.search);
+
       const goods = await getData(query.params.search);
+      console.log('goods in /seach router ', goods);
+
       Header(); 
       Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
@@ -111,7 +117,7 @@ export const initRouter = () => {
 
     .on('/cart', async () => {  
       Header(); 
-      Cart('',  main());
+      Cart('',  main(), localStorageLoad('ski-people-cart'));
       Footer();
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },

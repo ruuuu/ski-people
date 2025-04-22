@@ -9,7 +9,7 @@ let rendered = false;
 
 export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
-
+  console.log('data in product after /seach', data)
   const renderGoods = (data) => {
 
     let goodsItem = ``;
@@ -82,7 +82,6 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
 
   const catalogButtons = document.querySelector('.catalog');
   
-
   if(catalogButtons){
     const links = catalogButtons.querySelectorAll('.catalog__link'); // [a,a,a]
     

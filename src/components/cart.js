@@ -7,7 +7,7 @@ import { layout } from "./layout.js";
 
 let rendered = false;
 
-export const Cart= (action, parent) => { // по умолчанию data=[]
+export const Cart= (action, parent, data = []) => { // по умолчанию data=[]
 
   if(action === 'remove'){
     document.querySelector('.cart').remove(); // удаление элемента
@@ -24,7 +24,7 @@ export const Cart= (action, parent) => { // по умолчанию data=[]
   }
 
   
-  const el = document.createElement('div');
+  const el = document.createElement('section');
   el.classList.add('cart');
 
   
@@ -60,34 +60,36 @@ export const Cart= (action, parent) => { // по умолчанию data=[]
       </div>
     </div> 
 
-    <!-- <form class="cart__form" id="cartForm" action="#" method="POST"> -->
-    <!-- id="cartForm" указали для связки с button class="cart__order-button" -->
-    <h3 class="cart__form-title">Данные для доставки</h3>
-    <fieldset class="cart__form-inputs">
-      <input class="cart__form-input" type="text" name="name">
-      <input class="cart__form-input" type="tel" name="tel">
-      <input class="cart__form-input" type="email" name="email">
-      <input class="cart__form-input" type="text" name="address">
-      <textarea name="comment" id="comment"></textarea>
-    </fieldset>
-    <fieldset class="cart__form-fieldset">
-      <legend class="cart__form-legend">Доставка</legend>
-      <label class="cart__form-label">
-        <input class="cart__form-radio" type="radio" name="delivery" value="delivery"> Доставка
-      </label>
-      <label class="cart__form-label">
-        <input class="cart__form-radio" type="radio" name="delivery" value="pickup"> Самовывоз
-      </label>
-    </fieldset>
-    <fieldset class="cart__form-fieldset">
-      <legend class="cart__form-legend">Оплата</legend>
-      <label class="cart__form-label">
-        <input class="cart__form-radio" type="radio" name="payment" value="card"> Картой при получении
-      </label>
-      <label class="cart__form-label">
-        <input class="cart__form-radio" type="radio" name="payment" value="cash"> Наличными при получении
-      </label>
-    </fieldset>
+    <form class="cart__form form-order" id="cartForm" action="#" method="POST"> 
+      <!-- id="cartForm" указали для связки с button class="cart__order-button" -->
+      <h3 class="cart__form-title">Данные для доставки</h3>
+      <fieldset class="form-order__fieldset form-order__fieldset--input">
+        <input class="form-order__input" type="text" name="name">
+        <input class="form-order__input" type="tel" name="tel">
+        <input class="form-order__input" type="email" name="email">
+        <input class="form-order__input" type="text" name="address">
+        <textarea class="form-order__textarea" name="comment" id="comment"></textarea>
+      </fieldset>
+
+      <fieldset class="form-order__fieldset form-order__fieldset--radio">
+        <legend class="form-order__legend">Доставка</legend>
+        <label class="form-order__label radio">
+          <input class="radio__input" type="radio" name="delivery" value="delivery"> Доставка
+        </label>
+        <label class="form-order__label radio">
+          <input class="radio__input" type="radio" name="delivery" value="pickup"> Самовывоз
+        </label>
+      </fieldset>
+
+      <fieldset class="form-order__fieldset form-order__fieldset--radio">
+        <legend class="form-order__legend">Оплата</legend>
+        <label class="form-order__label radio">
+          <input class="radio__input" type="radio" name="payment" value="card"> Картой при получении
+        </label>
+        <label class="form-order__label radio">
+          <input class="radio__input" type="radio" name="payment" value="cash"> Наличными при получении
+        </label>
+      </fieldset>
   </form>
  </div>
   `;

@@ -1,6 +1,6 @@
 import { layout } from "./layout.js";
 import { API_URL_IMG } from "../js/const.js";
-import { localStorageLoad } from "../js/localStorage.js";
+import { localStorageLoad,localStorageSave } from "../js/localStorage.js";
 
 
 
@@ -34,10 +34,19 @@ export const Product = (title, parent, data, id) => {
  
 
   const favoriteList = localStorageLoad('ski-people-favorite'); // полуиили из сторидж [{},{}]
-  const favoriteProduct = favoriteList.find((item) =>  item.id === Number(id) );
+  const favoriteProduct = favoriteList.find((item) => item.id === Number(id));
   
 
-  
+  // const favButton = document.querySelector('.card__like-svg');
+
+  // favButton.addEventListener('click', () => {
+  //   favButton.classList.toggle('card__like-svg--active');
+  //   if(favoriteProduct){
+
+  //   }
+  //   localStorageSave('ski-people-favorite', favoriteList); // обновляем сторидж
+  // });
+
 
   const child = `
         <h2 class="product__title">${title}</h2>
@@ -138,7 +147,9 @@ export const Product = (title, parent, data, id) => {
     elProduct.append(layout(child, "product__container")); 
     
     parent.append(elProduct);
-  
+
+   
+
     rendered = true;
     
     return elProduct;
