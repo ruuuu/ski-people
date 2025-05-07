@@ -34,8 +34,9 @@ export const initRouter = () => {
       Pagination('', main(), goods);
       paginationCount(goods);
       Footer();
-      addFavorite(goods);
+      addFavorite(goods[0]);
       addToCart(goods[0]);
+      
       router.updatePageLinks(); // чтоб не было перезагрузки станицы(отслеживает новые роуты в урле)
       },
       {
@@ -84,7 +85,7 @@ export const initRouter = () => {
       Pagination('', main(), goods);
       paginationCount(goods);
       Footer();
-      addFavorite(goods);
+      addFavorite(goods[0]);
       router.updatePageLinks();
     },
     {
@@ -123,7 +124,7 @@ export const initRouter = () => {
       Header(); 
       Cart('Корзина', main(), cartGoods);
       Footer();
-      
+      //addToCart(cartGoods);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {

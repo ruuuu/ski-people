@@ -7,14 +7,34 @@ let rendered = false;
 
 
 
-export const ProductList = (title, data, parent) => { // data= [{},{}}]
+export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
-  console.log('data in product after /seach', data)
-  const renderGoods = (data) => {
+ 
+  if(title === 'remove'){
+    document.querySelector('.goods').remove(); // удаление элемента
+    rendered = false;
+    return ''; // выход из ProductList
+  }
 
-    let goodsItem = ``;
+
+  if(rendered){ // если уже отобразили
+    return ''; // выход из функции
+  }
+
+
+  const favoriteList = localStorageLoad('ski-people-favorite'); // [{},{}]  товара в Избранное
+  const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
+
+
   
+
+  const renderGoods = (data) => {
+    let goodsItem = ``;
+
     data.forEach(({ name, price, img, id }) => {
+      let inCart = cartList.find((cartItem) => cartItem.id === id);
+      
+
       goodsItem += `
         <li class="goods__item">
               <article class="goods__card card">
@@ -32,30 +52,18 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
                   <h3 class="card__info-title"> ${name} </h3>
                   <p class="card__info-price">${price.toLocaleString()} ₽</p>
                 </div>
-                <button class="card__button" data-id="${id}"> В корзину </button> <!-- добавили дата атрибут data-id чтоб при добавлениив В Корзину  знать какой товар -->
+                                           <!-- ${inCart ? 'disabled' : ''}  ${inCart ? 'В корзине' : 'В корзину'}-->
+                <button class="card__button"  data-id="${id}"> В корзину </button> <!-- добавили дата атрибут data-id чтоб при добавлениив В Корзину  знать какой товар -->
               </article>
-            </li>
-        `
+        </li>
+      `
     });
 
     return goodsItem; 
-  }
-
-  if(title === 'remove'){
-    document.querySelector('.goods').remove(); // удаление элемента
-    rendered = false;
-    return ''; // выход из ProductList
-  }
+  };
 
 
-  if(rendered){ // если уже отобразили
-    return '';
-    //return document.querySelector('.goods'); // выход из ProductList
-  }
 
-
-  
-  const favoriteList = localStorageLoad('ski-people-favorite'); // [{},{}]
 
 
   const goodsItems = renderGoods(data);
@@ -76,6 +84,8 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
   parent.append(el);
 
   rendered = true; 
+
+  
 
 
 
@@ -99,7 +109,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}]
       const list = document.querySelector('.goods__list');
       list.textContent = '';
      
-      const goodsItems = renderGoods(refreshList) // отфильрованные товары
+      const goodsItems = renderGoods(refreshList, '') // отфильрованные товары
 
       list.innerHTML = goodsItems;
     });

@@ -1,5 +1,5 @@
 import { localStorageLoad, localStorageSave } from "./localStorage.js"
-
+import { ProductList } from "../components/productList.js";
 
 
 
@@ -24,11 +24,19 @@ export const addToCart = async (data) => {
         const id = Number(cartButton.dataset.id);          // получили знач дата атрибута data-id
         console.log('id ', id)
         const item = data.find((item) => item.id === id);
-        console.log('добавляемы в корзину item  ', item )
-        cartList.push(item);
-        localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+        console.log('добавляемы в корзину item  ', item)
 
-        //likeButton.querySelector('svg').classList.toggle('card__like-svg--active');
+        
+
+        const cartItem = cartList.find((cartItem) => cartItem.id === id);
+        if(cartItem){
+          cartButton.textContent = cartItem ?  "В Корзине" : "В Корзину";
+          cartButton.disabled = true;
+          return; // выход из функции
+        }else{
+          cartList.push(item);
+          localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+        }
       }
     })
   }
