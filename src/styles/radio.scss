@@ -13,7 +13,7 @@
 
 
   &__input {
-    position: relative;
+    position: relative; // относительно него позиционируем радиокнопку
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -21,6 +21,7 @@
     margin-right: 8px;
 
     &:before {
+      // ненажатая радиокнопка
       content: "";
       display: block;
       width: 12px;
@@ -32,6 +33,7 @@
 
 
     &:after {
+      // для ружочка котрый поставится при нажатии на радиокнопку
       content: "";
       position: absolute;
       top: 50%;

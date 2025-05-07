@@ -14,6 +14,8 @@ import { paginationCount } from "./paginationCount.js";
 import { paginationData } from "./paginationData.js";
 import { slider } from './slider.js';
 import { Cart } from "../components/cart.js";
+import { addToCart } from "./addToCart.js";
+
 
 
 // создаем роутер:
@@ -33,6 +35,7 @@ export const initRouter = () => {
       paginationCount(goods);
       Footer();
       addFavorite(goods);
+      addToCart(goods[0]);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы(отслеживает новые роуты в урле)
       },
       {
@@ -62,7 +65,7 @@ export const initRouter = () => {
       router.updatePageLinks();
     },
     {
-      leave(done){ // хук сработает когда выходим со '/favorite'
+      leave(done){ // хук сработает когда выходим со '/product'
         Product('remove');
         Breadcrumbs('remove');
         done();
@@ -107,7 +110,7 @@ export const initRouter = () => {
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {
-       leave(done){ // хук сработает когда выходим со '/'
+       leave(done){ // хук сработает когда выходим со '/search'
           Catalog('remove');
           ProductList('remove');
           done();
@@ -116,13 +119,15 @@ export const initRouter = () => {
 
 
     .on('/cart', async () => {  
+      const cartGoods = await localStorageLoad('ski-people-cart'); // спсиок товаров Корзины
       Header(); 
-      Cart('',  main(), localStorageLoad('ski-people-cart'));
+      Cart('Корзина', main(), cartGoods);
       Footer();
+      
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {
-       leave(done){ // хук сработает когда выходим со '/'
+       leave(done){ // хук сработает когда выходим со '/cart'
           Cart('remove');
           done();
        },

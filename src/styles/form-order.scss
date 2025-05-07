@@ -12,7 +12,7 @@
 
   @media (min-width: 820px) {
     gap: 24px 16px;
-    grid-template-columns: 196px 196px 1fr;
+    grid-template-columns: 196px 196px 1fr; // 3-ий столбец займет все оставшееся пространство
   }
 
 
@@ -24,7 +24,7 @@
 
     &--input {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr; // займет все осташееся место
       gap: 8px;
 
       @media (min-width: 580px) {
@@ -49,15 +49,19 @@
 
 
   &__input {
-    border-radius: 4px;
-    background-color: #eeeff2;
-    padding: 0 14px;
     width: 100%;
     height: 38px;
+    padding: 0 14px;
+    border-radius: 4px;
+    background-color: #eeeff2;
     border: none;
 
     &::placeholder {
       color: #969eae;
+    }
+
+    &:hover {
+      border: 1px solid #dfe3eb;
     }
 
     &:disabled {

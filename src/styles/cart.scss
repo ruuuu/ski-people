@@ -148,7 +148,7 @@
   .counter {
     // грид эл маленький
     grid-area: control;
-    justify-self: start;
+    justify-self: start; // выравнивает по горизонтали относительно грид ячейки
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -158,7 +158,7 @@
     border: 1px solid #eeeff2;
 
     @media (min-width: 768px) {
-      align-self: end;
+      align-self: end; // выравнивает по вертикали относительно грид ячейки
     }
   }
 

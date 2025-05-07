@@ -1,7 +1,4 @@
-
 import { layout } from "./layout.js";
-
-
 
 
 
@@ -30,7 +27,7 @@ export const Cart= (action, parent, data = []) => { // по умолчанию d
   
   
   const child = `
-    <h2 class="cart__title">Корзина</h2>
+    <h2 class="cart__title">${action}</h2>
 
     <ul class="cart__products">
       <li class="cart__product">
@@ -92,7 +89,7 @@ export const Cart= (action, parent, data = []) => { // по умолчанию d
       </fieldset>
   </form>
  </div>
-  `;
+`;
 
 
   el.append(layout(child, "cart__container")); 
