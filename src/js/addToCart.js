@@ -8,7 +8,7 @@ export const addToCart = async (data) => {
   console.log('data in AddTocart ', data)
 
   
-  const cartList = localStorageLoad('ski-people-cart'); // получили из сторидж [{},{}]
+  let cartList = await localStorageLoad('ski-people-cart'); // получили из сторидж [{},{}]
   console.log('cartList ', cartList)
 
   const list = document.querySelector('.goods__list');
@@ -20,21 +20,32 @@ export const addToCart = async (data) => {
       console.log('cartButton ', cartButton)  
         
       if(cartButton) { 
-        console.log('наажли на  cartButton')
+        console.log('нашли нажатую  кнопку cartButton')
         const id = Number(cartButton.dataset.id);          // получили знач дата атрибута data-id
         console.log('id ', id)
         const item = data.find((item) => item.id === id);
         console.log('добавляемы в корзину item  ', item)
 
+        if(cartList.lendth === 0){
+          cartList.push(item);
+          localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+        }
+
+        console.log('cartList ', cartList)
+        
+        localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+        const cartItem = cartList.find((cartItem) => cartItem.id === id);
+        console.log('cartItem ', cartItem);
         
 
-        const cartItem = cartList.find((cartItem) => cartItem.id === id);
         if(cartItem){
           cartButton.textContent = cartItem ?  "В Корзине" : "В Корзину";
           cartButton.disabled = true;
           return; // выход из функции
         }else{
           cartList.push(item);
+          cartButton.textContent =  "В Корзине";
+          cartButton.disabled = true;
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
         }
       }
