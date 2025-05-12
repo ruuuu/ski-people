@@ -4,20 +4,20 @@ import { paginationData } from "./paginationData.js";
 
 
 export const getData = async (query) => { //  query то, что ввели в поле
-  console.log('query ', query)
+  //console.log('query ', query)
 
   try{
     const response = await fetch(API_URL);
     const obj = await response.json();
-    console.log('obj ', obj) // [{}, {}, {}]
+    //console.log('obj ', obj) // [{}, {}, {}]
 
     if(query){
-      console.log('сюда зашли ');
+      //console.log('сюда зашли ');
       const result = query.replace(/\+/g, " ");
-      console.log('result ', result); // Ботинки
+      //console.log('result ', result); // Ботинки
 
       const querySearchArray = obj.filter((item) => item.name.includes(result) || item.type.includes(query)); // [{},{}]
-      console.log('querySearchArray ', querySearchArray);
+      //console.log('querySearchArray ', querySearchArray);
       return querySearchArray;
       //return paginationData(querySearchArray, 12); // выход из функции
     }

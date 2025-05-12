@@ -1,9 +1,13 @@
+import { localStorageLoad } from "../js/localStorage.js";
 import { layout } from "./layout.js";
+
 
 let rendered = false;
 
 
 export const Header = () => {
+
+  const cartList = localStorageLoad('ski-people-cart');
 
   // if(document.querySelector('header')){
   //   return '';
@@ -12,6 +16,8 @@ export const Header = () => {
   if(rendered){
     return '';
   }
+
+  
 
   const el = document.createElement('header');
   el.classList.add('header');
@@ -49,7 +55,7 @@ export const Header = () => {
 
           <a class="header__link" href="/cart">
             <span class="header__link-text">Корзина</span>
-            <span class="header__link-count">(5)</span>
+            <span class="header__link-count">(${cartList.length})</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.87329 1.33337L3.45996 3.75337" stroke="#1C1C1C" stroke-miterlimit="10" stroke-linecap="round"
                 stroke-linejoin="round" />

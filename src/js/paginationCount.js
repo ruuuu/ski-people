@@ -3,7 +3,7 @@
 
 export const paginationCount = (data) => {  // [[{},{}], [], []] по 12 элементов в массивах
 
-  console.log('data in paginationCount ', data)
+  //console.log('data in paginationCount ', data)
 
   const buttons = document.querySelectorAll('.count-text__button');
  
@@ -15,7 +15,7 @@ export const paginationCount = (data) => {  // [[{},{}], [], []] по 12 эле�
 
   
   const paginationActiveElements = (index) => {
-    console.log('index ', index);
+    //console.log('index ', index);
 
     const paginationElements = document.querySelectorAll('.pagination__item');
 
@@ -34,7 +34,7 @@ export const paginationCount = (data) => {  // [[{},{}], [], []] по 12 эле�
     if(currentCount > 0 && currentCount < maxCount-1){
       currentCount--;
       paginationActiveElements(currentCount);
-      console.log('data[currentCount] левая ', data[currentCount])
+      //console.log('data[currentCount] левая ', data[currentCount])
     }
   });
 
@@ -45,7 +45,7 @@ export const paginationCount = (data) => {  // [[{},{}], [], []] по 12 эле�
     if(currentCount >= 0 && currentCount < maxCount-1){
       currentCount++;
       paginationActiveElements(currentCount);
-      console.log('data[currentCount] правая ', data[currentCount])
+      //console.log('data[currentCount] правая ', data[currentCount])
     }
   });
 }

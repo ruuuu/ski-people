@@ -4,7 +4,7 @@ import { layout } from "./layout.js";
 
 let rendered = false;
 
-export const Cart= (action, parent, data = []) => { // по умолчанию data=[]
+export const Cart = (action, parent, data = []) => { // по умолчанию data=[]
 
   if(action === 'remove'){
     document.querySelector('.cart').remove(); // удаление элемента

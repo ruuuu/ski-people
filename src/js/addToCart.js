@@ -3,13 +3,11 @@ import { ProductList } from "../components/productList.js";
 
 
 
-// добавлени товара в Избранное:
+// добавлени товара в Корзину:
 export const addToCart = async (data) => {
-  console.log('data in AddTocart ', data)
-
   
   let cartList = await localStorageLoad('ski-people-cart'); // получили из сторидж [{},{}]
-  console.log('cartList ', cartList)
+ 
 
   const list = document.querySelector('.goods__list');
 
@@ -17,35 +15,37 @@ export const addToCart = async (data) => {
     list.addEventListener('click', (evt) => { // навешиваем обработчк на родителя(делегирование) чтобы при добавлении новых картчоек  обработчик автоматом навесился
       console.log('попали в обработчик события ')
       const cartButton = evt.target.closest('.card__button') // если нажатый элемент кнопка "В корзину" 
-      console.log('cartButton ', cartButton)  
+    
         
       if(cartButton) { 
-        console.log('нашли нажатую  кнопку cartButton')
+        
         const id = Number(cartButton.dataset.id);          // получили знач дата атрибута data-id
-        console.log('id ', id)
         const item = data.find((item) => item.id === id);
-        console.log('добавляемы в корзину item  ', item)
+        
 
         if(cartList.lendth === 0){
           cartList.push(item);
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
         }
 
-        console.log('cartList ', cartList)
+      
         
         localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
-        const cartItem = cartList.find((cartItem) => cartItem.id === id);
-        console.log('cartItem ', cartItem);
+        const cartItem = cartList.find((cartItem) => Number(cartItem.id) === Number(id));
+       
         
 
         if(cartItem){
+         
           cartButton.textContent = cartItem ?  "В Корзине" : "В Корзину";
           cartButton.disabled = true;
+          cartButton.classList.add('unActive');
           return; // выход из функции
         }else{
           cartList.push(item);
-          cartButton.textContent =  "В Корзине";
+          cartButton.textContent = "В Корзине";
           cartButton.disabled = true;
+          cartButton.classList.add('unActive');
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
         }
       }

@@ -27,7 +27,6 @@ export const initRouter = () => {
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
       console.log('goods[0] ', goods[0]);
-
       Header(); 
       Catalog('', main(), goods[0]); 
       ProductList("Список товаров", goods[0], main());
@@ -35,7 +34,7 @@ export const initRouter = () => {
       paginationCount(goods);
       Footer();
       addFavorite(goods[0]);
-      addToCart(goods[0]);
+      addToCart(goods[0]); // наешивае обработчик клика на кнопку Корзина
       
       router.updatePageLinks(); // чтоб не было перезагрузки станицы(отслеживает новые роуты в урле)
       },

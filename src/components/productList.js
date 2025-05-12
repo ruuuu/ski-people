@@ -25,15 +25,15 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
   const favoriteList = localStorageLoad('ski-people-favorite'); // [{},{}]  товара в Избранное
   const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
 
-
+ 
   
 
   const renderGoods = (data) => {
     let goodsItem = ``;
 
     data.forEach(({ name, price, img, id }) => {
-      let inCart = cartList.find((cartItem) => cartItem.id === id);
-      
+      let inCart = cartList.find((cartItem) => Number(cartItem.id) === Number(id)); // {}-товар корзины
+      console.log('inCart ', inCart)
 
       goodsItem += `
         <li class="goods__item">
@@ -52,8 +52,8 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
                   <h3 class="card__info-title"> ${name} </h3>
                   <p class="card__info-price">${price.toLocaleString()} ₽</p>
                 </div>
-                                           <!-- ${inCart ? 'disabled' : ''}  ${inCart ? 'В корзине' : 'В корзину'}-->
-                <button class="card__button"  data-id="${id}"> В корзину </button> <!-- добавили дата атрибут data-id чтоб при добавлениив В Корзину  знать какой товар -->
+                                         
+                <button class="card__button ${inCart ? 'unActive' : ''}" data-id="${id}" ${inCart ? 'disabled' : ''}> ${inCart ? 'В корзине' : 'В корзину'} </button> <!-- добавили дата атрибут data-id чтоб при добавлениив В Корзину  знать какой товар -->
               </article>
         </li>
       `
@@ -66,7 +66,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
 
 
-  const goodsItems = renderGoods(data);
+  const goodsItems = renderGoods(data); // '<li></li> <li></li> <li></li> <li></li>'
 
   const el = document.createElement('section');
   el.classList.add('goods');
@@ -89,7 +89,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
 
 
-
+  //
   const catalogButtons = document.querySelector('.catalog');
   
   if(catalogButtons){

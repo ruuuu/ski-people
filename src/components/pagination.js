@@ -26,7 +26,7 @@ export const Pagination = (action, parent, data) => {
 
     const listItems = data.map((item) => `<li class="pagination__item"></li>`).join('');
 
-    console.log('listItems ', listItems)
+    //console.log('listItems ', listItems)
    
   
     
