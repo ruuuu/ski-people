@@ -56,7 +56,8 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
 
   if(rendered){ // если уже отобразили
-    return ''; // выход из функции
+    console.log('уже отрисовали станицу товаров, далее не идем')
+    return ''; // выход из ProductList
   }
 
 

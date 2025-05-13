@@ -1,14 +1,12 @@
 import { localStorageLoad, localStorageSave } from "./localStorage.js"
-import { Header } from "../components/header.js";
+
 
 
 
 // добавлени товара в Корзину:
-export const addToCart = async (data) => {
+export const addToCart = async (data) => {  // data исходные товары
   
   let cartList = await localStorageLoad('ski-people-cart'); // получили из сторидж [{},{}]
- 
-
   const list = document.querySelector('.goods__list');
 
   if(list){
@@ -24,9 +22,10 @@ export const addToCart = async (data) => {
         if(cartList.lendth === 0){
           cartList.push(item);
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+          // ProductList('remove');
+          // ProductList("Список товаров", data, main());
           document.querySelector('.header__link-count').textContent = "(" + localStorageLoad('ski-people-cart').length + ")";
         }
-
     
         localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
         const cartItem = cartList.find((cartItem) => Number(cartItem.id) === Number(id));
@@ -37,13 +36,17 @@ export const addToCart = async (data) => {
           cartButton.textContent = cartItem ?  "В Корзине" : "В Корзину";
           cartButton.disabled = true;
           cartButton.classList.add('unActive');
+          // ProductList('remove');
+          // ProductList("Список товаров", data, main());
           return; // выход из функции
         }else{
           cartList.push(item);
+          localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
           cartButton.textContent = "В Корзине";
           cartButton.disabled = true;
           cartButton.classList.add('unActive');
-          localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+          // ProductList('remove');
+          // ProductList("Список товаров", data, main());
           document.querySelector('.header__link-count').textContent =  "(" + localStorageLoad('ski-people-cart').length + ")";
         }
       }
