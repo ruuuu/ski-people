@@ -123,7 +123,6 @@ export const initRouter = () => {
       Header(); 
       Cart('Корзина', main(), cartGoods);
       Footer();
-      //addToCart(cartGoods);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {

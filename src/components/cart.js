@@ -1,7 +1,9 @@
 import { layout } from "./layout.js";
+import { localStorageLoad } from "../js/localStorage.js";
 
 
 
+// Отображение товаров Корзины(страница Корзина)
 let rendered = false;
 
 export const Cart = (action, parent, data = []) => { // по умолчанию data=[]
@@ -20,27 +22,46 @@ export const Cart = (action, parent, data = []) => { // по умолчанию 
     return document.querySelector('.cart');
   }
 
+  const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
+
   
   const el = document.createElement('section');
   el.classList.add('cart');
 
-  
-  
+
+
+  const renderCartGoods = (cartProducts) => {
+    let cartItems = ``;
+
+    cartProducts.forEach(({ name, price, img, id }) => {
+      cartItems += `
+        <li class="cart__product">
+          <img class="cart__item-image" src="/img/${img}" alt="Синие лыжи">
+          <h3 class="cart__item-title">${name}</h3>
+          <p class="cart__item-price">${price.toLocaleString()}&nbsp;₽</p>
+          <p class="cart__item-id">арт. ${id}</p>
+          <div class="input__item-counter counter">
+            <button class="counter__minus" type="button">-</button>
+            <p class="counter__number">1</p>
+            <button class="counter__plus" type="button">+</button>
+          </div>
+      </li>
+      `
+    });
+
+    return cartItems; 
+  };
+
+
+
+
+
+  const cartsItems = renderCartGoods(cartList); // '<li></li> <li></li> <li></li> <li></li>'
+
   const child = `
     <h2 class="cart__title">${action}</h2>
-
     <ul class="cart__products">
-      <li class="cart__product">
-        <img class="cart__item-image" src="/img/ski-mini.jpg" alt="Синие лыжи">
-        <h3 class="cart__item-title">Горные лыжи</h3>
-        <p class="cart__item-price">5&nbsp;000&nbsp;₽</p>
-        <p class="cart__item-id">арт. 84348945757</p>
-        <div class="input__item-counter counter">
-          <button class="counter__minus" type="button">-</button>
-          <p class="counter__number">1</p>
-          <button class="counter__plus" type="button">+</button>
-        </div>
-      </li>
+     ${cartsItems}
     </ul>
 
     <div class="cart__order">

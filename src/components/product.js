@@ -6,7 +6,7 @@ import { localStorageLoad,localStorageSave } from "../js/localStorage.js";
 
 let rendered = false;
 
-
+// страница Товара
 export const Product = (title, parent, data, id) => {
   console.log(id)
 
