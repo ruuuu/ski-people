@@ -1,5 +1,5 @@
 import { localStorageLoad, localStorageSave } from "./localStorage.js"
-import { ProductList } from "../components/productList.js";
+import { Header } from "../components/header.js";
 
 
 
@@ -18,25 +18,22 @@ export const addToCart = async (data) => {
     
         
       if(cartButton) { 
-        
         const id = Number(cartButton.dataset.id);          // получили знач дата атрибута data-id
         const item = data.find((item) => item.id === id);
-        
-
+      
         if(cartList.lendth === 0){
           cartList.push(item);
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+          document.querySelector('.header__link-count').textContent = "(" + localStorageLoad('ski-people-cart').length + ")";
         }
 
-      
-        
+    
         localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
         const cartItem = cartList.find((cartItem) => Number(cartItem.id) === Number(id));
        
         
 
         if(cartItem){
-         
           cartButton.textContent = cartItem ?  "В Корзине" : "В Корзину";
           cartButton.disabled = true;
           cartButton.classList.add('unActive');
@@ -47,6 +44,7 @@ export const addToCart = async (data) => {
           cartButton.disabled = true;
           cartButton.classList.add('unActive');
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+          document.querySelector('.header__link-count').textContent =  "(" + localStorageLoad('ski-people-cart').length + ")";
         }
       }
     })

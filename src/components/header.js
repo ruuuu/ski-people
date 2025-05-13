@@ -1,5 +1,6 @@
-import { localStorageLoad } from "../js/localStorage.js";
 import { layout } from "./layout.js";
+import { localStorageLoad } from "../js/localStorage.js";
+
 
 
 let rendered = false;
@@ -8,13 +9,15 @@ let rendered = false;
 export const Header = () => {
 
   const cartList = localStorageLoad('ski-people-cart');
+  console.log('cartList in header ', cartList)
 
   // if(document.querySelector('header')){
   //   return '';
   // } 
   // или:
   if(rendered){
-    return '';
+    console.log('header уже отображен, выход из фукнции')
+    return ''; // выход
   }
 
   
@@ -55,7 +58,7 @@ export const Header = () => {
 
           <a class="header__link" href="/cart">
             <span class="header__link-text">Корзина</span>
-            <span class="header__link-count">(${cartList.length})</span>
+            <span class="header__link-count">(${cartList ? cartList.length : 0})</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.87329 1.33337L3.45996 3.75337" stroke="#1C1C1C" stroke-miterlimit="10" stroke-linecap="round"
                 stroke-linejoin="round" />
