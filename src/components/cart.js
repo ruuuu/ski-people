@@ -22,41 +22,41 @@ export const Cart = (action, parent, data = []) => { // по умолчанию 
     return document.querySelector('.cart');
   }
 
-  const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
 
-  
+  const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
+  const sum = cartList.reduce((acc, item) =>  acc + item.price * item.count, 0);
+
   const el = document.createElement('section');
   el.classList.add('cart');
 
 
-
-  const renderCartGoods = (cartProducts) => {
-    let cartItems = ``;
-
-    cartProducts.forEach(({ name, price, img, id }) => {
-      cartItems += `
+  let cartItems = ``;
+  const renderCartGoods = (cartProducts, result) => {
+    
+    cartProducts.forEach(({ name, price, img, id, count }) => {
+      result += `
         <li class="cart__product">
           <img class="cart__item-image" src="/img/${img}" alt="Синие лыжи">
           <h3 class="cart__item-title">${name}</h3>
           <p class="cart__item-price">${price.toLocaleString()}&nbsp;₽</p>
           <p class="cart__item-id">арт. ${id}</p>
           <div class="input__item-counter counter">
-            <button class="counter__minus" type="button">-</button>
-            <p class="counter__number">1</p>
-            <button class="counter__plus" type="button">+</button>
+            <button class="counter__button counter__minus" type="button" data-id=${id}>-</button>
+            <p class="counter__number">${count}</p>
+            <button class="counter__button counter__plus" type="button" data-id=${id}>+</button>
           </div>
       </li>
       `
     });
 
-    return cartItems; 
+    return result; 
   };
 
 
 
 
 
-  const cartsItems = renderCartGoods(cartList); // '<li></li> <li></li> <li></li> <li></li>'
+  const cartsItems = renderCartGoods(cartList, cartItems); // '<li></li> <li></li> <li></li> <li></li>'
 
   const child = `
     <h2 class="cart__title">${action}</h2>
@@ -68,8 +68,8 @@ export const Cart = (action, parent, data = []) => { // по умолчанию 
       <h3 class="cart__order-title">Оформление</h3>
       <div class="cart__order-info">
         <div class="cart__order-wrapper">
-          <p class="cart__order-count"> 4 товар на сумму:</p>
-          <p class="cart__order-price">20&nbsp;000&nbsp;₽</p>
+          <p class="cart__order-count"> ${cartList.length} товар на сумму:</p>
+          <p class="cart__order-price">${sum.toLocaleString()}&nbsp;₽</p>
         </div>
 
         <p class="cart__order-delivery">Доставка 0 ₽</p>

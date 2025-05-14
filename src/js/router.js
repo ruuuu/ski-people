@@ -15,6 +15,8 @@ import { paginationData } from "./paginationData.js";
 import { slider } from './slider.js';
 import { Cart } from "../components/cart.js";
 import { addToCart } from "./addToCart.js";
+import { cartCount } from "./cartCount.js";
+
 
 
 
@@ -122,6 +124,7 @@ export const initRouter = () => {
       const cartGoods = await localStorageLoad('ski-people-cart'); // спсиок товаров Корзины
       Header(); 
       Cart('Корзина', main(), cartGoods);
+      cartCount();
       Footer();
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },

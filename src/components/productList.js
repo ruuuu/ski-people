@@ -71,9 +71,9 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
 
 
+  let cartItems = ``;
 
-
-  const goodsItems = renderGoods(data, ''); // '<li></li> <li></li> <li></li> <li></li>'
+  const goodsItems = renderGoods(data, cartItems); // '<li></li> <li></li> <li></li> <li></li>'
 
   const el = document.createElement('section');
   el.classList.add('goods');

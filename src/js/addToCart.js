@@ -18,6 +18,8 @@ export const addToCart = async (data) => {  // data исходные товар�
       if(cartButton) { 
         const id = Number(cartButton.dataset.id);          // получили знач дата атрибута data-id
         const item = data.find((item) => item.id === id);
+
+        item.count = 1;  // добавили свойство count
       
         if(cartList.lendth === 0){
           cartList.push(item);
