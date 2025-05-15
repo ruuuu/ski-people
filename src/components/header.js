@@ -9,14 +9,14 @@ let rendered = false;
 export const Header = () => {
 
   const cartList = localStorageLoad('ski-people-cart');
-  console.log('cartList in header ', cartList)
+  //console.log('cartList in header ', cartList)
 
   // if(document.querySelector('header')){
   //   return '';
   // } 
   // или:
   if(rendered){
-    console.log('header уже отображен, выход из фукнции')
+    //console.log('header уже отображен, выход из фукнции')
     return ''; // выход
   }
 

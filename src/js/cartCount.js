@@ -27,13 +27,16 @@ export const cartCount = () => {
               if(evt.target.textContent === '+'){
                 cartList[index].count += 1;
                 cartList[index].price += cartList[index].price;
+                counterText.textContent = cartList[index].count;
                 priceElems[index].innerHTML = `${cartList[index].price.toLocaleString()}&nbsp;₽`;
-                
               }
               if(evt.target.textContent === '-'){
                 cartList[index].count -= 1; 
-                cartList[index].price -= cartList[index].price;
-                priceElems[index].innerHTML = `${cartList[index].price.toLocaleString()}&nbsp;₽`;
+                counterText.textContent = cartList[index].count;
+                //console.log("list.querySelectorAll('.cart__item-price')[index].textContent ", list.querySelectorAll('.cart__item-price')[index].textContent.replace('₽', ''))
+                let newPrice = Number(list.querySelectorAll('.cart__item-price')[index].textContent.replace('₽', '')) - cartList[index].price;
+                list.querySelectorAll('.cart__item-price')[index].innerHTML = `${newPrice.toLocaleString()}&nbsp;₽`;
+                
                 if(cartList[index].count <= 0){
                   cartList.splice(index, 1); // удалям Из массива
                 }
@@ -41,7 +44,7 @@ export const cartCount = () => {
                 // list.querySelectorAll('.counter__number')[index].textContent = cartList[index].count;
                 // list.querySelectorAll('.cart__item-price')[index].innerHTML = `${cartList[index].price.toLocaleString()}&nbsp;₽`; // цена
               }
-              counterText.textContent = cartList[index].count;
+              
               localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
               
             }

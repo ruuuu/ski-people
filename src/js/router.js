@@ -28,7 +28,7 @@ export const initRouter = () => {
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
-      console.log('goods[0] ', goods[0]);
+      //console.log('goods[0] ', goods[0]);
       Header(); 
       Catalog('', main(), goods[0]); 
       ProductList("Список товаров", goods[0], main());
