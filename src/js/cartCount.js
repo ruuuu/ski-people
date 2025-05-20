@@ -1,12 +1,21 @@
 import { localStorageLoad, localStorageSave } from "./localStorage.js";
-
+import { renderCartGoods } from "../components/cart.js";
 
 
 export const cartCount = () => {
 
   const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
   const list = document.querySelector('.cart__products');
+
   
+  let initPrices = []; // массив  price
+  cartList.forEach((cartElem, i) => {
+    initPrices[i] = cartElem.price;
+  });
+
+ 
+  
+
   if(list){
     list.addEventListener('click', (evt) => { // навешиваем на родител чтобы при добавлении новых товаров не вешать обработчик на товар
         const counterButton = evt.target.closest('.counter__button'); // если нажатый элемент кнопка "В корзину" 
@@ -14,43 +23,27 @@ export const cartCount = () => {
          
         if(counterButton) { // если нажатый элемент кнопка "В корзину"
           const id = Number(counterButton.dataset.id); 
-          console.log('id of counterButton ', id);
-
-          const counterText = evt.target.closest('.counter').querySelector('.counter__number');
-          console.log('counterText ', counterText)
-
-          const priceElems = list.querySelectorAll('.cart__item-price');
-
-          cartList.map((cartItem, index) => {
+         
+          cartList.forEach((cartItem, index) => {
             if(cartItem.id === id){
-              console.log('evt.target ', evt.target)
               if(evt.target.textContent === '+'){
                 cartList[index].count += 1;
-                cartList[index].price += cartList[index].price;
-                counterText.textContent = cartList[index].count;
-                priceElems[index].innerHTML = `${cartList[index].price.toLocaleString()}&nbsp;₽`;
+                cartList[index].price += initPrices[index];
               }
               if(evt.target.textContent === '-'){
-                cartList[index].count -= 1; 
-                counterText.textContent = cartList[index].count;
-                //console.log("list.querySelectorAll('.cart__item-price')[index].textContent ", list.querySelectorAll('.cart__item-price')[index].textContent.replace('₽', ''))
-                let newPrice = Number(list.querySelectorAll('.cart__item-price')[index].textContent.replace('₽', '')) - cartList[index].price;
-                list.querySelectorAll('.cart__item-price')[index].innerHTML = `${newPrice.toLocaleString()}&nbsp;₽`;
-                
                 if(cartList[index].count <= 0){
                   cartList.splice(index, 1); // удалям Из массива
+                }else{
+                  cartList[index].count -= 1; 
+                  cartList[index].price -= initPrices[index];
                 }
-               
-                // list.querySelectorAll('.counter__number')[index].textContent = cartList[index].count;
-                // list.querySelectorAll('.cart__item-price')[index].innerHTML = `${cartList[index].price.toLocaleString()}&nbsp;₽`; // цена
               }
               
               localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
-              
+              document.querySelector('.cart__products').innerHTML = '';
+              document.querySelector('.cart__products').innerHTML = renderCartGoods(localStorageLoad('ski-people-cart'), ``);
             }
           });
-
-        //localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
         }
       });
   }

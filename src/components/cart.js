@@ -3,6 +3,33 @@ import { localStorageLoad } from "../js/localStorage.js";
 
 
 
+export const renderCartGoods = (cartProducts, result) => {
+    
+    cartProducts.forEach(({ name, price, img, id, count }) => {
+      result += `
+        <li class="cart__product">
+          <img class="cart__item-image" src="/img/${img}" alt="Синие лыжи">
+          <h3 class="cart__item-title">${name}</h3>
+          <p class="cart__item-price">${price} ₽</p> 
+          <p class="cart__item-id">арт. ${id}</p>
+          <div class="input__item-counter counter">
+            <button class="counter__button counter__minus" type="button" data-id=${id}>-</button>
+            <p class="counter__number">${count}</p>
+            <button class="counter__button counter__plus" type="button" data-id=${id}>+</button>
+          </div>
+      </li>
+      `
+    });
+
+    return result; 
+};
+
+
+
+
+
+
+
 // Отображение товаров Корзины(страница Корзина)
 let rendered = false;
 
@@ -30,33 +57,13 @@ export const Cart = (action, parent, data = []) => { // по умолчанию 
   el.classList.add('cart');
 
 
-  let cartItems = ``;
-  const renderCartGoods = (cartProducts, result) => {
-    
-    cartProducts.forEach(({ name, price, img, id, count }) => {
-      result += `
-        <li class="cart__product">
-          <img class="cart__item-image" src="/img/${img}" alt="Синие лыжи">
-          <h3 class="cart__item-title">${name}</h3>
-          <p class="cart__item-price">${price.toLocaleString()}&nbsp;₽</p>
-          <p class="cart__item-id">арт. ${id}</p>
-          <div class="input__item-counter counter">
-            <button class="counter__button counter__minus" type="button" data-id=${id}>-</button>
-            <p class="counter__number">${count}</p>
-            <button class="counter__button counter__plus" type="button" data-id=${id}>+</button>
-          </div>
-      </li>
-      `
-    });
-
-    return result; 
-  };
+  //let cartItems = ``;
+ 
 
 
 
 
-
-  const cartsItems = renderCartGoods(cartList, cartItems); // '<li></li> <li></li> <li></li> <li></li>'
+  const cartsItems = renderCartGoods(cartList, ``); // '<li></li> <li></li> <li></li> <li></li>'
 
   const child = `
     <h2 class="cart__title">${action}</h2>
@@ -110,7 +117,7 @@ export const Cart = (action, parent, data = []) => { // по умолчанию 
       </fieldset>
   </form>
  </div>
-`;
+  `;
 
 
   el.append(layout(child, "cart__container")); 
