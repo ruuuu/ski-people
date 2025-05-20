@@ -40,8 +40,10 @@ export const cartCount = () => {
               }
               
               localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
-              document.querySelector('.cart__products').innerHTML = '';
-              document.querySelector('.cart__products').innerHTML = renderCartGoods(localStorageLoad('ski-people-cart'), ``);
+              list.innerHTML = '';
+              list.innerHTML = renderCartGoods(localStorageLoad('ski-people-cart'), ``);
+              document.querySelector('.cart__order-price').textContent = `${(cartList.reduce((acc, item) => acc + item.price, 0)).toLocaleString()}&nbsp;₽`;
+              document.querySelector('.cart__order-count').textContent = cartList.length;
             }
           });
         }

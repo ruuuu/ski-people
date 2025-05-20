@@ -51,17 +51,11 @@ export const Cart = (action, parent, data = []) => { // по умолчанию 
 
 
   const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
-  const sum = cartList.reduce((acc, item) =>  acc + item.price * item.count, 0);
+  const sum = cartList.reduce((acc, item) => acc + item.price, 0);
+
 
   const el = document.createElement('section');
   el.classList.add('cart');
-
-
-  //let cartItems = ``;
- 
-
-
-
 
   const cartsItems = renderCartGoods(cartList, ``); // '<li></li> <li></li> <li></li> <li></li>'
 
