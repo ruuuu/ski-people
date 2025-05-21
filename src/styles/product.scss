@@ -166,11 +166,16 @@
             color: #1C1C1C;
         }
     }
+
+    .unActive {
+        border: 1px solid #9747ff;
+        background-color: rgba(0, 68, 240, 0.2);
+        color: #ffff;
+    }
 }
 
 
 .slider-thumbs {
-
 
     .swiper-wrapper {
         @media (max-width: 768px) {
