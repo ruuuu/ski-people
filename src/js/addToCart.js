@@ -24,8 +24,6 @@ export const addToCart = async (data) => {  // data исходные товар�
         if(cartList.lendth === 0){
           cartList.push(item);
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
-          // ProductList('remove');
-          // ProductList("Список товаров", data, main());
           document.querySelector('.header__link-count').textContent = "(" + localStorageLoad('ski-people-cart').length + ")";
         }
     
@@ -38,8 +36,7 @@ export const addToCart = async (data) => {  // data исходные товар�
           cartButton.textContent = cartItem ?  "В Корзине" : "В Корзину";
           cartButton.disabled = true;
           cartButton.classList.add('unActive');
-          // ProductList('remove');
-          // ProductList("Список товаров", data, main());
+          // вызывать фукнцию пеерисовки
           return; // выход из функции
         }else{
           cartList.push(item);
@@ -47,8 +44,7 @@ export const addToCart = async (data) => {  // data исходные товар�
           cartButton.textContent = "В Корзине";
           cartButton.disabled = true;
           cartButton.classList.add('unActive');
-          // ProductList('remove');
-          // ProductList("Список товаров", data, main());
+          // вызывать фукнцию пеерисовки
           document.querySelector('.header__link-count').textContent =  "(" + localStorageLoad('ski-people-cart').length + ")";
         }
       }

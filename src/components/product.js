@@ -39,17 +39,7 @@ export const Product = (title, parent, data, id) => {
   const cartList = localStorageLoad('ski-people-cart'); // полуиили из сторидж [{},{}]
   const cartProduct = cartList.find((item) => item.id === Number(id));
 
-  // const favButton = document.querySelector('.card__like-svg');
-
-  // favButton.addEventListener('click', () => {
-  //   favButton.classList.toggle('card__like-svg--active');
-  //   if(favoriteProduct){
-
-  //   }
-  //   localStorageSave('ski-people-favorite', favoriteList); // обновляем сторидж
-  // });
-
-
+ 
   const child = `
         <h2 class="product__title">${title}</h2>
 
@@ -131,8 +121,8 @@ export const Product = (title, parent, data, id) => {
                 <td class="product__table-item">Макс. нагрузка</td>
                 <td class="product__table-item">${objProduct.max_weight}</td>
               </tr>
-            </table>
-          <div class="info-buttons">
+           </table>
+           <div class="info-buttons">
             <button class="${cartProduct ? 'unActive' : ''} info-buttons__to-cart" type="button" ${cartProduct ? 'disabled' : ''}>${cartProduct ? 'В Корзине' : 'В Корзину'}</button>
             <button class="info-buttons__like">
               <svg class='card__like-svg ${favoriteProduct ? 'card__like-svg--active': ''}' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,6 +140,11 @@ export const Product = (title, parent, data, id) => {
     
     parent.append(elProduct);
 
+    
+    document.querySelector('.info-buttons__to-cart').addEventListener('click', () => {
+      cartList.push(objProduct);
+      localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
+    });
    
 
     rendered = true;
