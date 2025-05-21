@@ -12,7 +12,7 @@ export const search = () => {
     searchForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
       console.log('input.value in search.js ', input.value)
-      router.navigate(`/search?query=${input.value}`); // после отправки формы перейдет на этот урл
+      router.navigate(`/search?search=${input.value}`); // после отправки формы перейдет на этот урл
     });
   }
 

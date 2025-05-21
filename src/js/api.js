@@ -4,15 +4,12 @@ import { paginationData } from "./paginationData.js";
 
 
 export const getData = async (query) => { //  query то, что ввели в поле
-  console.log('query:', query)
-
+ 
   try{
     const response = await fetch(API_URL);
     const obj = await response.json();
-    console.log('obj:', obj) // [{}, {}, {}]
 
     if(query){
-      console.log('сюда зашли ');
       const result = query.replace(/\+/g, " ");
       
       const querySearchArray = obj.filter((item) => {
@@ -22,11 +19,7 @@ export const getData = async (query) => { //  query то, что ввели в �
           } 
         }
       });   
-        
-        
-      
-      console.log('querySearchArray:', querySearchArray);
-      
+         
       return querySearchArray; // выход 
       
     }

@@ -100,17 +100,11 @@ export const initRouter = () => {
       },
     },)
 
-    .on('/search', async (query) => {  // при прееходе на "/search?query", запустися колбэк
-      console.log('query.params.query:', query.params.query);
-      console.log('query.params.query.length', query.params.query.length)
-
-      const goods = await getData(query.params.query);
-      console.log('отфильтрованный goods in /seach router:', goods);
-
+    .on('/search', async (search) => {  // при прееходе на "/search?search", запустися колбэк 
+      const goods = await getData(search.params.search);
       Header(); 
-      //Catalog('', main(), goods); 
+      Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
-      router.navigate('/');
       Footer();
       addFavorite(goods);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
