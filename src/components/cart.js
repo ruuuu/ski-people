@@ -83,11 +83,11 @@ export const Cart = (action, parent, data = []) => { // по умолчанию 
       <!-- id="cartForm" указали для связки с button class="cart__order-button" -->
       <h3 class="cart__form-title">Данные для доставки</h3>
       <fieldset class="form-order__fieldset form-order__fieldset--input">
-        <input class="form-order__input" type="text" name="name">
-        <input class="form-order__input" type="tel" name="tel">
-        <input class="form-order__input" type="email" name="email">
-        <input class="form-order__input" type="text" name="address">
-        <textarea class="form-order__textarea" name="comment" id="comment"></textarea>
+        <input class="form-order__input" type="text" name="name" placeholder="ФИО">
+        <input class="form-order__input" type="tel" name="tel" placeholder="Телефон">
+        <input class="form-order__input" type="email" name="email" placeholder="Email">
+        <input class="form-order__input" type="text" name="address" placeholder="Адрес доставки">
+        <textarea class="form-order__textarea" name="comment" id="comment" placeholder="Комментарий"></textarea>
       </fieldset>
 
       <fieldset class="form-order__fieldset form-order__fieldset--radio">

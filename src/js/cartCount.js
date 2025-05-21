@@ -1,5 +1,7 @@
 import { localStorageLoad, localStorageSave } from "./localStorage.js";
 import { renderCartGoods } from "../components/cart.js";
+import { router } from "./router.js";
+
 
 
 export const cartCount = () => {
@@ -50,6 +52,23 @@ export const cartCount = () => {
       });
   }
 
+
+
+  const form = document.querySelector('.form-order');
+
+  if(form){
+    form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData); // data={ name:'Alsy', address:'Test', tel:'89274435612', email:'tre@mail.ru', delivery:'pickup', payment: "cash" }
+      data.orderId = Math.floor(Math.random(0, 5000) * 10)+1;
+      console.log('data ', data)
+      
+      localStorageSave('ski-people-order', data); // сохрнил в localStorage
+      router.navigate('/order'); // после нажатия отправка будет переход на урл Роутер
+    });
+  }
   
 
 };
+

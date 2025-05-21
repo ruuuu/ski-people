@@ -19,7 +19,6 @@ import { cartCount } from "./cartCount.js";
 
 
 
-
 // создаем роутер:
 export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // для всех ссылок начинающихся на /
 
@@ -126,6 +125,23 @@ export const initRouter = () => {
       Cart('Корзина', main(), cartGoods);
       cartCount();
       Footer();
+      router.updatePageLinks(); // чтоб не было перезагрузки станицы
+      },
+      {
+       leave(done){ // хук сработает когда выходим со '/cart'
+          Cart('remove');
+          done();
+       },
+    },)
+
+    .on('/order', async () => {  
+      // const dataOrder = await localStorageLoad('ski-people-order'); // данные заказа
+      Header(); 
+      // функия рендера модалки и передать туда:
+      //renderOrder(dataOrder);
+      cartCount();
+      Footer();
+     
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {

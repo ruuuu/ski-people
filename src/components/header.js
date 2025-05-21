@@ -9,8 +9,7 @@ let rendered = false;
 export const Header = () => {
 
   const cartList = localStorageLoad('ski-people-cart');
-  //console.log('cartList in header ', cartList)
-
+ 
   // if(document.querySelector('header')){
   //   return '';
   // } 
