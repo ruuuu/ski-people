@@ -17,6 +17,10 @@
     @media (min-width: 768px) {
       width: 408px;
     }
+
+    @media (min-width: 1440px) {
+      padding: 0;
+    }
   }
 
   &__wrapper {
@@ -50,8 +54,8 @@
 
   &__good-id {
     min-width: 70px;
+    max-width: 150px;
     display: inline-block;
-
     margin-bottom: 20px;
     padding: 8px 9px;
     border-radius: 32px;

@@ -54,7 +54,7 @@ export const cartCount = () => {
 
 
 
-  const form = document.querySelector('.form-order');
+  const form = document.querySelector('.form-order'); // форма отправки заказа
 
   if(form){
     form.addEventListener('submit', (evt) => {
@@ -62,10 +62,10 @@ export const cartCount = () => {
       const formData = new FormData(form);
       const data = Object.fromEntries(formData); // data={ name:'Alsy', address:'Test', tel:'89274435612', email:'tre@mail.ru', delivery:'pickup', payment: "cash" }
       data.orderId = Math.floor(Math.random(0, 5000) * 10)+1;
-      console.log('data ', data)
-      
+      data.price = document.querySelector('.cart__order-price').textContent;
+      console.log('data ', data);
       localStorageSave('ski-people-order', data); // сохрнил в localStorage
-      router.navigate('/order'); // после нажатия отправка будет переход на урл Роутер
+      router.navigate('/order'); // после нажатия отправка будет переход на урл /order
     });
   }
   

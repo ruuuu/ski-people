@@ -2,8 +2,6 @@ import { layout } from "./layout.js";
 
 
 
-
-
 let rendered = false;
 
 export const Catalog = (action, parent, data = []) => { // по умолчанию data=[]

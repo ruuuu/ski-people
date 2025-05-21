@@ -10,5 +10,5 @@ export const layout  = (child, className) => {
 
   el.innerHTML = child;
 
-  return el; // <div class="container"> <dic class="catalog__list">.. </div>
+  return el; // <div class="container className"> <dic class="catalog__list">.. </div>
 }

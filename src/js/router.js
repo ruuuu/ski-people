@@ -16,6 +16,8 @@ import { slider } from './slider.js';
 import { Cart } from "../components/cart.js";
 import { addToCart } from "./addToCart.js";
 import { cartCount } from "./cartCount.js";
+import { Order } from "../components/order.js";
+
 
 
 
@@ -135,18 +137,16 @@ export const initRouter = () => {
     },)
 
     .on('/order', async () => {  
-      // const dataOrder = await localStorageLoad('ski-people-order'); // данные заказа
+      const dataOrder = await localStorageLoad('ski-people-order'); // данные заказа
       Header(); 
       // функия рендера модалки и передать туда:
-      //renderOrder(dataOrder);
-      cartCount();
+      Order('', main(), dataOrder); 
       Footer();
-     
       router.updatePageLinks(); // чтоб не было перезагрузки станицы
       },
       {
        leave(done){ // хук сработает когда выходим со '/cart'
-          Cart('remove');
+          Order('remove');
           done();
        },
     },)
