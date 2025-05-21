@@ -47,6 +47,7 @@ export const renderGoods = (data, result) => {
 
 
 export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
+  console.log('data in ProductList.js:', data)
 
   if(title === 'remove'){
     document.querySelector('.goods').remove(); // удаление элемента
@@ -65,11 +66,6 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
   // const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
 
  
-  
-
- 
-
-
 
   let cartItems = ``;
 
@@ -96,7 +92,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
 
 
-  //
+  // фильр по товарам:
   const catalogButtons = document.querySelector('.catalog');
   
   if(catalogButtons){

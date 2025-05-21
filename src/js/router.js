@@ -17,7 +17,7 @@ import { Cart } from "../components/cart.js";
 import { addToCart } from "./addToCart.js";
 import { cartCount } from "./cartCount.js";
 import { Order } from "../components/order.js";
-
+import { search } from "./search.js";
 
 
 
@@ -31,10 +31,11 @@ export const initRouter = () => {
       const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
       //console.log('goods[0] ', goods[0]);
       Header(); 
+      search();
       Catalog('', main(), goods[0]); 
       ProductList("Список товаров", goods[0], main());
-      Pagination('', main(), goods);
-      paginationCount(goods);
+      // Pagination('', main(), goods);
+      // paginationCount(goods);
       Footer();
       addFavorite(goods[0]);
       addToCart(goods[0]); // наешивае обработчик клика на кнопку Корзина
@@ -45,7 +46,7 @@ export const initRouter = () => {
        leave(done){ // хук сработает когда выходим со '/'
           Catalog('remove');
           ProductList('remove');
-          Pagination('remove');
+          //Pagination('remove');
           done();
        },
     },)
@@ -99,15 +100,17 @@ export const initRouter = () => {
       },
     },)
 
-    .on('/search', async (query) => {  // при прееходе на "/search", запустися колбэк
-      console.log('query.params.search ', query.params.search);
+    .on('/search', async (query) => {  // при прееходе на "/search?query", запустися колбэк
+      console.log('query.params.query:', query.params.query);
+      console.log('query.params.query.length', query.params.query.length)
 
-      const goods = await getData(query.params.search);
-      console.log('goods in /seach router ', goods);
+      const goods = await getData(query.params.query);
+      console.log('отфильтрованный goods in /seach router:', goods);
 
       Header(); 
-      Catalog('', main(), goods); 
+      //Catalog('', main(), goods); 
       ProductList("Список товаров", goods, main());
+      router.navigate('/');
       Footer();
       addFavorite(goods);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы

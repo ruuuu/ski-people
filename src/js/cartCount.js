@@ -68,7 +68,6 @@ export const cartCount = () => {
       router.navigate('/order'); // после нажатия отправка будет переход на урл /order
     });
   }
-  
 
 };
 
