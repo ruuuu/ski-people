@@ -34,8 +34,8 @@ export const initRouter = () => {
       search();
       Catalog('', main(), goods[0]); 
       ProductList("Список товаров", goods[0], main());
-      // Pagination('', main(), goods);
-      // paginationCount(goods);
+      Pagination('', main(), goods, 0); //рисуте пагинацю
+      paginationCount(goods); // ставит обработчикикна кнпоки
       Footer();
       addFavorite(goods[0]);
       addToCart(goods[0]); // наешивае обработчик клика на кнопку Корзина
@@ -85,8 +85,8 @@ export const initRouter = () => {
         ]
      );
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
-      Pagination('', main(), goods);
-      paginationCount(goods);
+      // Pagination('', main(), goods);
+      // paginationCount(goods);
       Footer();
       addFavorite(goods[0]);
       router.updatePageLinks();
