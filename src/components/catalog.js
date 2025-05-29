@@ -31,7 +31,7 @@ export const Catalog = (action, parent, data = []) => { // по умолчани
   data.map(({ type }) => { // деструктурировали item
     typeList.push(type);
   });
-  
+
 
   let catalogItem = ``;
 

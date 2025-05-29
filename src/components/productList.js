@@ -30,7 +30,7 @@ export const renderGoods = (data, result) => {
               </button>
               <div class="card__info">
                 <h3 class="card__info-title"> ${name} </h3>
-                <p class="card__info-price">${price.toLocaleString()} ₽</p>
+                <p class="card__info-price">${price} ₽</p>
               </div>
                                        
               <button class="card__button ${inCart ? 'unActive' : ''}" data-id="${id}" ${inCart ? 'disabled' : ''}> ${inCart ? 'В корзине' : 'В корзину'} </button> <!-- добавили дата атрибут data-id чтоб при добавлениив В Корзину  знать какой товар -->
@@ -62,10 +62,6 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
   }
 
 
-  // const favoriteList = localStorageLoad('ski-people-favorite'); // [{},{}]  товара в Избранное
-  // const cartList = localStorageLoad('ski-people-cart'); // [{},{}]  товары корзины
-
- 
 
   let cartItems = ``;
 
@@ -92,7 +88,7 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
 
 
-  // фильр по товарам:
+  // фильр по категориям:
   const catalogButtons = document.querySelector('.catalog');
   
   if(catalogButtons){
@@ -108,11 +104,14 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
    
       const refreshList = data.filter((item) => item.type === evt.target.textContent); // [{},{}] отфильрованный
 
-      // console.log('refreshList ', refreshList)
       const list = document.querySelector('.goods__list');
       list.textContent = '';
      
-      const goodsItems = renderGoods(refreshList, '') // отфильрованные товары
+      let goodsItems = renderGoods(refreshList, ``);      // отфильрованные товары
+
+      if(evt.target.textContent === 'Все'){
+        goodsItems = renderGoods(data, '');
+      }
 
       list.innerHTML = goodsItems;
     });

@@ -7,9 +7,9 @@ export const getData = async (query) => { //  query то, что ввели в �
  
   try{
     const response = await fetch(API_URL);
-    const obj = await response.json();
+    const obj = await response.json(); // [{},{},{}]
 
-    if(query){
+    if(query != '' && query != null){
       const result = query.replace(/\+/g, " ");
       
       const querySearchArray = obj.filter((item) => {
@@ -19,10 +19,11 @@ export const getData = async (query) => { //  query то, что ввели в �
           } 
         }
       });   
+      console.log('querySearchArray ', querySearchArray)
          
-      return querySearchArray; // выход 
-      
+      return paginationData(querySearchArray, 12); // выход [{},{},{}]
     }
+  
 
     return paginationData(obj, 12); // [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
   }

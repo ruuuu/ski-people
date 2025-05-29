@@ -29,13 +29,14 @@ export const initRouter = () => {
   router
     .on('/', async () => {  // при прееходе на "/", запустися колбэк
       const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
-      //console.log('goods[0] ', goods[0]);
+      console.log('goods /', goods)
+      console.log('goods[0] ', goods[0])
       Header(); 
-      search();
+      //search();
       Catalog('', main(), goods[0]); 
       ProductList("Список товаров", goods[0], main());
-      Pagination('', main(), goods, 0); //рисуте пагинацю
-      paginationCount(goods); // ставит обработчикикна кнпоки
+      Pagination('', main(), goods, 1); //рисуте пагинацю
+      paginationCount(goods, 1); // ставит обработчикикна кнпоки
       Footer();
       addFavorite(goods[0]);
       addToCart(goods[0]); // наешивае обработчик клика на кнопку Корзина
@@ -46,7 +47,7 @@ export const initRouter = () => {
        leave(done){ // хук сработает когда выходим со '/'
           Catalog('remove');
           ProductList('remove');
-          //Pagination('remove');
+          Pagination('remove');
           done();
        },
     },)
@@ -103,8 +104,8 @@ export const initRouter = () => {
     .on('/search', async (search) => {  // при прееходе на "/search?search", запустися колбэк 
       const goods = await getData(search.params.search);
       Header(); 
-      Catalog('', main(), goods); 
-      ProductList("Список товаров", goods, main());
+      Catalog('', main(), goods[0]); 
+      ProductList("Список товаров", goods[0], main());
       Footer();
       addFavorite(goods);
       router.updatePageLinks(); // чтоб не было перезагрузки станицы

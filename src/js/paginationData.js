@@ -1,6 +1,6 @@
 
 
-export const paginationData = (data, size) => {
+export const paginationData = (data, size) => { // data = [{},{},{}]
 
   const paginationSized = [];
 
@@ -9,5 +9,6 @@ export const paginationData = (data, size) => {
     paginationSized.push(data.slice(i, i + size)); 
   }
 
-  return paginationSized; // [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
+  console.log('paginationSized ', paginationSized)
+  return paginationSized; // [Array(12), Array(10)]
 }

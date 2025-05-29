@@ -3,9 +3,14 @@ import { layout } from "./layout.js";
 let rendered = false;
 
 
-export const Pagination = (action, parent, data, k) => {
-    console.log('data ', data) // [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12)]
-    console.log('k ', k)
+export const Pagination = (action, parent, data, pagination) => {
+    //console.log('data ', data) // [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12)]
+    console.log('pagination ', pagination)
+
+    const maxPagination = data.flat(Infinity).length;
+    // data.slice() - [[],[],[]]
+    const currentPagination = (data, currentCount) => data.slice(0, currentCount + 1).reduce((acc, item) => acc + item.length, 0)
+
   
     if(action === 'remove'){
       console.log('зашли гду remove')
@@ -38,7 +43,7 @@ export const Pagination = (action, parent, data, k) => {
         </ul>
         <div class="pagination__count count-text">
           <button class="count-text__button" type="button">&lt;</button>
-          <p class="count-text__text">${k} из ${data[0].length}</p>
+          <p class="count-text__text">${currentPagination(data, Number(pagination))} из ${maxPagination}</p>
           <button class="count-text__button" type="button">&gt;</button>
         </div> 
     `;

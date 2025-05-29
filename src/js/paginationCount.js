@@ -1,20 +1,26 @@
 import { ProductList } from "../components/productList.js";
 import { main } from "../components/main.js";
 import { Pagination } from "../components/pagination.js";
+import { router } from "./router.js";
 
 
 
+export const paginationCount = (data, currentCount) => {  // data=[[{},{}], [{},{}], [{},{}]] по 12 элементов в массивах
 
-export const paginationCount = (data) => {  // [[{},{}], [{},{}], [{},{}]] по 12 элементов в массивах
+  //console.log('data in paginationCount ', data)
+  console.log('currentCount ', currentCount)
 
-  console.log('data in paginationCount ', data)
+  const maxPagination = data.flat(Infinity).length;
+    // data.slice() - [[],[],[]]
+  const currentPagination = (data, currentCount) => data.slice(0, currentCount + 1).reduce((acc, item) => acc + item.length, 0)
+
 
   const buttons = document.querySelectorAll('.count-text__button');
  
-  const maxCount = data.length; // 9 массивов
+  const maxCount = data ? data.length : 0; // 9 массивов
   console.log('maxCount ', maxCount)
   
-  let currentCount = 0;
+  
 
 
 
@@ -35,37 +41,27 @@ export const paginationCount = (data) => {  // [[{},{}], [{},{}], [{},{}]] по 
 
 
   buttons[0].addEventListener('click', () => { // левая кнопка
+    buttons.forEach((button) => button.classList.remove('pagination-button'));
+    
+    buttons[0].classList.add('pagination-button')
     
     if(currentCount > 0 && currentCount < maxCount){
       currentCount--;
-      console.log('currentCount посл нажатия стал равным ', currentCount)
-      console.log('data[currentCount] левая ', data[currentCount])
-
+  
       paginationActiveElements(currentCount);
-      
-      ProductList('remove', data[currentCount], main());
-      document.querySelector('main').append(ProductList("Список товаров", data[currentCount], main()), Pagination('', main(), data));
-
-      
     }
   });
 
 
 
   buttons[1].addEventListener('click', () => { // правая кнопка
-
+    buttons.forEach((button) => button.classList.remove('pagination-button'));
+    buttons[1].classList.add('pagination-button');
+    
     if(currentCount >= 0 && currentCount < maxCount-1){
       currentCount++;
-      console.log('currentCount стал ', currentCount)
-      console.log('data[currentCount] правая ', data[currentCount])
 
       paginationActiveElements(currentCount);
-      
-      
-      ProductList('remove', data[currentCount], main());
-      Pagination('remove', main(), data, currentCount);  // [Array(12),Array(12),Array(12)]
-      document.querySelector('main').append(ProductList("Список товаров", data[currentCount], main()), Pagination('', main(), data, currentCount));
-      //document.querySelector('main').append(Pagination('', main(), data));
       
     }
   });
