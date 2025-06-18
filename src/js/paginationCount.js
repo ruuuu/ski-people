@@ -7,22 +7,12 @@ import { router } from "./router.js";
 
 export const paginationCount = (data, currentCount) => {  // data=[[{},{}], [{},{}], [{},{}]] по 12 элементов в массивах
 
-  //console.log('data in paginationCount ', data)
-  console.log('currentCount ', currentCount)
+  const buttons = document.querySelector('.pagination__count');
 
-  const maxPagination = data.flat(Infinity).length;
-    // data.slice() - [[],[],[]]
-  const currentPagination = (data, currentCount) => data.slice(0, currentCount + 1).reduce((acc, item) => acc + item.length, 0)
-
-
-  const buttons = document.querySelectorAll('.count-text__button');
- 
   const maxCount = data ? data.length : 0; // 9 массивов
   console.log('maxCount ', maxCount)
-  
-  
 
-
+  
 
   
   const paginationActiveElements = (index) => {
@@ -35,34 +25,40 @@ export const paginationCount = (data, currentCount) => {  // data=[[{},{}], [{},
     });
 
     paginationElements[index].classList.add('pagination__item--active');
+  };
+
+
+  const changePagination = ({ target }) => {
+    if(target.matches('button')){ // если это кнопка
+      if(target.textContent == '<'){
+        if(currentCount > 0 && currentCount <= maxCount){
+          currentCount--;
+        }
+        else{
+          return; // выход из фукнции
+        }
+      }
+
+      if(target.textContent == '>'){
+        if(currentCount >= 0 && currentCount < maxCount-1){
+          currentCount++;
+        }
+        else{
+          return;
+        }
+      }
+    }
+
+    
+    ProductList('remove');
+    paginationActiveElements(currentCount);
+    router.navigate(`/?pagination=${currentCount}`);    // переход на эту страницу
+    Pagination('remove', main(), data[currentCount], currentCount);
+    buttons.removeEventListener('click', changePagination);
   }
+
+  buttons.addEventListener('click', changePagination); // делегирование, обработчик навесили не на кнопку, а на ее родителя
+};
+
+
   
-   
-
-
-  buttons[0].addEventListener('click', () => { // левая кнопка
-    buttons.forEach((button) => button.classList.remove('pagination-button'));
-    
-    buttons[0].classList.add('pagination-button')
-    
-    if(currentCount > 0 && currentCount < maxCount){
-      currentCount--;
-  
-      paginationActiveElements(currentCount);
-    }
-  });
-
-
-
-  buttons[1].addEventListener('click', () => { // правая кнопка
-    buttons.forEach((button) => button.classList.remove('pagination-button'));
-    buttons[1].classList.add('pagination-button');
-    
-    if(currentCount >= 0 && currentCount < maxCount-1){
-      currentCount++;
-
-      paginationActiveElements(currentCount);
-      
-    }
-  });
-}

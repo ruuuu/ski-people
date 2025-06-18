@@ -17,7 +17,7 @@ import { Cart } from "../components/cart.js";
 import { addToCart } from "./addToCart.js";
 import { cartCount } from "./cartCount.js";
 import { Order } from "../components/order.js";
-import { search } from "./search.js";
+
 
 
 
@@ -27,19 +27,20 @@ export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' }); // д�
 
 export const initRouter = () => {  
   router
-    .on('/', async () => {  // при прееходе на "/", запустися колбэк
+    .on('/', async ({ params }) => {  // при прееходе на "/", запустися колбэк
+      console.log('params ', params)
+      console.log('params ', params ? params.pagination : 0)
       const goods = await getData(); //  [Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(12), Array(4)]
-      console.log('goods /', goods)
-      console.log('goods[0] ', goods[0])
+
       Header(); 
       //search();
-      Catalog('', main(), goods[0]); 
-      ProductList("Список товаров", goods[0], main());
-      Pagination('', main(), goods, 1); //рисуте пагинацю
-      paginationCount(goods, 1); // ставит обработчикикна кнпоки
+      Catalog('', main(), goods[params ? params.pagination : 0]); 
+      ProductList("Список товаров", goods[params ? params.pagination : 0], main());
+      Pagination('', main(), goods, params ? params.pagination : 0); // рисует пагинацю
+      paginationCount(goods, params ? params.pagination : 0); // ставит обработчик на кнопки
       Footer();
       addFavorite(goods[0]);
-      addToCart(goods[0]); // наешивае обработчик клика на кнопку Корзина
+      addToCart(goods[0]); // навешиват  обработчик клика на кнопку Корзина
       
       router.updatePageLinks(); // чтоб не было перезагрузки станицы(отслеживает новые роуты в урле)
       },

@@ -10,5 +10,5 @@ export const paginationData = (data, size) => { // data = [{},{},{}]
   }
 
   console.log('paginationSized ', paginationSized)
-  return paginationSized; // [Array(12), Array(10)]
+  return paginationSized; // [Array(12), Array(12), Array(12)]
 }

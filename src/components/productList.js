@@ -80,7 +80,15 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
 
   el.append(layout(child, "goods__container")); 
   
-  parent.append(el);
+  // if(document.querySelector('.pagination')){
+  //   parent.insertBefore(el, document.querySelector('.pagination')); // вставляет пагинацию после el
+  // }
+  // else{
+  //   parent.append(el);
+  // }
+
+  parent.insertBefore(el, document.querySelector('.pagination')); // вставляет пагинацию после el(списка товаров)
+  
 
   rendered = true; 
 
