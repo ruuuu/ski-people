@@ -4,7 +4,7 @@ let rendered = false;
 
 
 export const Pagination = (action, parent, data, pagination) => { // pagination - индекс страницы
-    //console.log('data ', data) // Array(12)
+    console.log('data in Pagination ', data) // Array(12)
     console.log('pagination in Pagination ', pagination)
     
 
@@ -42,7 +42,7 @@ export const Pagination = (action, parent, data, pagination) => { // pagination 
         </ul>
         <div class="pagination__count count-text">
           <button class="count-text__button" type="button">&lt;</button>
-          <p class="count-text__text">${pagination} из ${maxPagination}</p>
+          <p class="count-text__text">${pagination} из ${data.length}</p>
           <button class="count-text__button" type="button">&gt;</button>
         </div> 
     `;

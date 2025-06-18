@@ -1,6 +1,6 @@
 import { layout } from "./layout.js";
 import { localStorageLoad } from "../js/localStorage.js";
-
+import { Pagination } from "./pagination.js";
 
 // Вывод товаров
 let rendered = false;
@@ -122,6 +122,8 @@ export const ProductList = (title, data, parent) => { // data= [{},{}}] =12 шт
       }
 
       list.innerHTML = goodsItems;
+      Pagination('remove');
+
     });
   }
 

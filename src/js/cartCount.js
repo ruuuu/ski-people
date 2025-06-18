@@ -1,7 +1,7 @@
 import { localStorageLoad, localStorageSave } from "./localStorage.js";
 import { renderCartGoods } from "../components/cart.js";
 import { router } from "./router.js";
-
+import { Header } from "../components/header.js";
 
 
 export const cartCount = () => {
@@ -21,7 +21,7 @@ export const cartCount = () => {
   if(list){
     list.addEventListener('click', (evt) => { // навешиваем на родител чтобы при добавлении новых товаров не вешать обработчик на товар
         const counterButton = evt.target.closest('.counter__button'); // если нажатый элемент кнопка "В корзину" 
-        console.log('counterButton ', counterButton)
+        //console.log('counterButton ', counterButton)
          
         if(counterButton) { // если нажатый элемент кнопка "В корзину"
           const id = Number(counterButton.dataset.id); 
@@ -53,7 +53,6 @@ export const cartCount = () => {
   }
 
 
-
   const form = document.querySelector('.form-order'); // форма отправки заказа
 
   if(form){
@@ -63,11 +62,14 @@ export const cartCount = () => {
       const data = Object.fromEntries(formData); // data={ name:'Alsy', address:'Test', tel:'89274435612', email:'tre@mail.ru', delivery:'pickup', payment: "cash" }
       data.orderId = Math.floor(Math.random(0, 5000) * 10)+1;
       data.price = document.querySelector('.cart__order-price').textContent;
-      console.log('data ', data);
+      //console.log('data ', data);
       localStorageSave('ski-people-order', data); // сохрнил в localStorage
       router.navigate('/order'); // после нажатия отправка будет переход на урл /order
+      localStorageSave('ski-people-cart', []);  // обновляем сторидж
+      Header();
     });
   }
+
 
 };
 

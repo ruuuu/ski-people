@@ -5,12 +5,12 @@ import { router } from "./router.js";
 
 
 
-export const paginationCount = (data, currentCount) => {  // data=[[{},{}], [{},{}], [{},{}]] по 12 элементов в массивах
+export const paginationCount = (data, currentCount, url) => {  // data=[[{},{}], [{},{}], [{},{}]] по 12 элементов в массивах
 
   const buttons = document.querySelector('.pagination__count');
 
   const maxCount = data ? data.length : 0; // 9 массивов
-  console.log('maxCount ', maxCount)
+  //console.log('maxCount ', maxCount)
 
   
 
@@ -40,7 +40,7 @@ export const paginationCount = (data, currentCount) => {  // data=[[{},{}], [{},
       }
 
       if(target.textContent == '>'){
-        if(currentCount >= 0 && currentCount < maxCount-1){
+        if(currentCount >= 0 && currentCount <= maxCount-1){
           currentCount++;
         }
         else{
@@ -52,7 +52,7 @@ export const paginationCount = (data, currentCount) => {  // data=[[{},{}], [{},
     
     ProductList('remove');
     paginationActiveElements(currentCount);
-    router.navigate(`/?pagination=${currentCount}`);    // переход на эту страницу
+    router.navigate(`${url}?pagination=${currentCount}`);    // переход на эту страницу
     Pagination('remove', main(), data[currentCount], currentCount);
     buttons.removeEventListener('click', changePagination);
   }

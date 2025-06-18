@@ -18,11 +18,16 @@ export const addToCart = async (data) => {  // data исходные товар�
       if(cartButton) { 
         const id = Number(cartButton.dataset.id);          // получили знач дата атрибута data-id
         const item = data.find((item) => item.id === id);
+        console.log('item ', item)
 
-        item.count = 1;  // добавили свойство count
+       if(item){
+        item.count =+ 1;
+       }
+        
       
         if(cartList.lendth === 0){
           cartList.push(item);
+          item.count = 1; 
           localStorageSave('ski-people-cart', cartList);  // обновляем сторидж
           document.querySelector('.header__link-count').textContent = "(" + localStorageLoad('ski-people-cart').length + ")";
         }

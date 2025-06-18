@@ -37,7 +37,7 @@ export const initRouter = () => {
       Catalog('', main(), goods[params ? params.pagination : 0]); 
       ProductList("Список товаров", goods[params ? params.pagination : 0], main());
       Pagination('', main(), goods, params ? params.pagination : 0); // рисует пагинацю
-      paginationCount(goods, params ? params.pagination : 0); // ставит обработчик на кнопки
+      paginationCount(goods, params ? params.pagination : 0, '/'); // ставит обработчик на кнопки
       Footer();
       addFavorite(goods[0]);
       addToCart(goods[0]); // навешиват  обработчик клика на кнопку Корзина
@@ -78,7 +78,7 @@ export const initRouter = () => {
       },
     },)
 
-    .on('/favorite', async() => { 
+    .on('/favorite', async({ params }) => { 
       const goods = await getData();
       Header(); 
       Breadcrumbs('', main(), 
@@ -87,10 +87,10 @@ export const initRouter = () => {
         ]
      );
       ProductList("Избранное", localStorageLoad('ski-people-favorite'), main());
-      // Pagination('', main(), goods);
-      // paginationCount(goods);
+      Pagination('', main(), localStorageLoad('ski-people-favorite'), params ? params.pagination : 0); // рисует пагинацю
+      paginationCount(goods, params ? params.pagination : 0, '/favorite'); // ставит обработчик на кнопки
       Footer();
-      addFavorite(goods[0]);
+      addFavorite(goods);
       router.updatePageLinks();
     },
     {
